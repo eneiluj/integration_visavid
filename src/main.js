@@ -7,10 +7,11 @@ import { dirname } from '@nextcloud/paths'
 import { showError } from '@nextcloud/dialogs'
 import axios from '@nextcloud/axios'
 import moment from '@nextcloud/moment'
+import '../css/main.scss'
 
 let lastPath = null
 
 document.addEventListener('DOMContentLoaded', (event) => {
 	const View = Vue.extend(App)
-	const appVue = new View().$mount('#visavid_main')
+	const appVue = new View().$mount('#content')
 })
