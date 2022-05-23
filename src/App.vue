@@ -1,10 +1,11 @@
 <template>
 	<Content app-name="integration_visavid">
 		<VisavidNavigation
-			:selected-room-id="2"
+			:rooms="rooms"
+			:selected-room="selectedRoom"
 			@create-room-clicked="onCreateRoomClick"
-			@room-clicked=""
-			@delete-room="" />
+			@room-clicked="onRoomClicked"
+			@delete-room="onRoomDeleted" />
 		<AppContent
 			:list-max-width="50"
 			:list-min-width="20"
@@ -25,7 +26,9 @@
 		<Modal v-if="creationModalOpen"
 			size="normal"
 			@close="closeCreationModal">
-			plop modal
+			<CreationForm
+				@ok-clicked="onCreationValidate"
+				@cancel-clicked="closeCreationModal" />
 		</Modal>
 	</Content>
 </template>
@@ -40,11 +43,13 @@ import RoomDetails from './components/RoomDetails'
 import Content from '@nextcloud/vue/dist/Components/Content'
 import Modal from '@nextcloud/vue/dist/Components/Modal'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
+import CreationForm from './components/CreationForm'
 
 export default {
 	name: 'App',
 
 	components: {
+		CreationForm,
 		RoomDetails,
 		VisavidNavigation,
 		CheckIcon,
@@ -60,6 +65,8 @@ export default {
 	data() {
 		return {
 			creationModalOpen: false,
+			rooms: [],
+			selectedRoom: null,
 		}
 	},
 
@@ -78,6 +85,16 @@ export default {
 		},
 		closeCreationModal() {
 			this.creationModalOpen = false
+		},
+		onCreationValidate(room) {
+			this.creationModalOpen = false
+			this.rooms.push(room)
+		},
+		onRoomClicked(room) {
+			this.selectedRoom = room
+		},
+		onRoomDeleted(room) {
+			console.debug('DELETE room', room)
 		},
 	},
 }

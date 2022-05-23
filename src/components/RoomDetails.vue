@@ -14,7 +14,7 @@ export default {
 	},
 
 	props: {
-		bills: {
+		room: {
 			type: Object,
 			required: true,
 		},
