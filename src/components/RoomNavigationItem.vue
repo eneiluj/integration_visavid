@@ -86,13 +86,13 @@ export default {
 	methods: {
 		onRoomClick(e) {
 			if (e.target.tagName === 'SPAN') {
-				this.$emit('room-clicked', this.room)
+				this.$emit('room-clicked', this.room.id)
 			}
 		},
 		onDeleteClick() {
 			this.deleting = true
 			this.deletionTimer = new Timer(() => {
-				this.$emit('delete-room', this.room)
+				this.$emit('delete-room', this.room.id)
 			}, 7000)
 		},
 		cancelDeletion() {

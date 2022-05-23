@@ -2,7 +2,7 @@
 	<Content app-name="integration_visavid">
 		<VisavidNavigation
 			:rooms="rooms"
-			:selected-room="selectedRoom"
+			:selected-room-id="selectedRoomId"
 			@create-room-clicked="onCreateRoomClick"
 			@room-clicked="onRoomClicked"
 			@delete-room="onRoomDeleted" />
@@ -65,8 +65,8 @@ export default {
 	data() {
 		return {
 			creationModalOpen: false,
-			rooms: [],
-			selectedRoom: null,
+			rooms: {},
+			selectedRoomId: 0,
 		}
 	},
 
@@ -77,6 +77,9 @@ export default {
 	},
 
 	computed: {
+		selectedRoom() {
+			return this.rooms[this.selectedRoomId]
+		},
 	},
 
 	methods: {
@@ -87,14 +90,20 @@ export default {
 			this.creationModalOpen = false
 		},
 		onCreationValidate(room) {
+			console.debug('CREATE', room)
 			this.creationModalOpen = false
-			this.rooms.push(room)
+			const nbRooms = Object.values(this.rooms).length
+			room.id = nbRooms + 1
+			this.$set(this.rooms, room.id, room)
+			console.debug(this.rooms)
 		},
-		onRoomClicked(room) {
-			this.selectedRoom = room
+		onRoomClicked(roomId) {
+			console.debug('select room', roomId)
+			this.selectedRoomId = roomId
 		},
-		onRoomDeleted(room) {
-			console.debug('DELETE room', room)
+		onRoomDeleted(roomId) {
+			console.debug('DELETE room', roomId)
+			this.$delete(this.rooms, roomId)
 		},
 	},
 }

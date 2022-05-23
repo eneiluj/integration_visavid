@@ -10,11 +10,11 @@
 				</template>
 			</AppNavigationItem>
 			<RoomNavigationItem
-				v-for="room in rooms"
-				:key="room.name"
+				v-for="room, id in rooms"
+				:key="id"
 				class="roomItem"
 				:room="room"
-				:selected="false"
+				:selected="room.id === selectedRoomId"
 				@room-clicked="onRoomClicked"
 				@delete-room="onRoomDeleted"/>
 		</template>
@@ -40,7 +40,11 @@ export default {
 
 	props: {
 		rooms: {
-			type: Array,
+			type: Object,
+			required: true,
+		},
+		selectedRoomId: {
+			type: Number,
 			required: true,
 		},
 	},
@@ -63,11 +67,11 @@ export default {
 		onCreateRoomClick() {
 			this.$emit('create-room-clicked')
 		},
-		onRoomClicked(room) {
-			this.$emit('room-clicked', room)
+		onRoomClicked(roomId) {
+			this.$emit('room-clicked', roomId)
 		},
-		onRoomDeleted(room) {
-			this.$emit('delete-room', room)
+		onRoomDeleted(roomId) {
+			this.$emit('delete-room', roomId)
 		},
 	},
 }

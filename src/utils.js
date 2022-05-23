@@ -31,3 +31,19 @@ export function delay(callback, ms) {
 		}, ms || 0)
 	}
 }
+
+export const fields = [
+	{
+		id: 'name',
+		label: t('integration_visavid', 'Room name'),
+		type: 'text',
+		placeholder: t('integration_visavid', 'Room name'),
+	},
+	{
+		id: 'comment',
+		label: t('integration_visavid', 'Comment'),
+		type: 'textarea',
+		placeholder: t('integration_visavid', 'What is this room about?'),
+	},
+]
+

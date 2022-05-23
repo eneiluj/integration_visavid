@@ -4,15 +4,28 @@
 			{{ t('integration_visavid', 'Create a room') }}
 		</h2>
 		<div class="fields">
-			<div class="field">
-				<TextIcon :size="20" />
-				<label for="room-name">
-					{{ t('integration_visavid', 'Room name') }}
-				</label>
-				<input id="room-name"
-					v-model="name"
-					type="text"
-					:placeholder="t('integration_visavid', 'Room name')" />
+			<div v-for="field in fields"
+				:key="field.id"
+				class="field">
+				<div v-if="field.type === 'text'">
+					<TextIcon :size="20" />
+					<label :for="'room-' + field.id">
+						{{ field.label }}
+					</label>
+					<input :id="'room-' + field.id"
+						   v-model="newRoom[field.id]"
+						   type="text"
+						   :placeholder="field.placeholder" />
+				</div>
+				<div v-else-if="field.type === 'textarea'">
+					<TextLongIcon :size="20" />
+					<label :for="'room-' + field.id">
+						{{ field.label }}
+					</label>
+					<textarea :id="'room-' + field.id"
+						v-model="newRoom[field.id]"
+						:placeholder="field.placeholder" />
+				</div>
 			</div>
 		</div>
 		<div class="footer">
@@ -36,7 +49,10 @@
 import CheckIcon from 'vue-material-design-icons/Check'
 import UndoIcon from 'vue-material-design-icons/Undo'
 import TextIcon from 'vue-material-design-icons/Text'
+import TextLongIcon from 'vue-material-design-icons/TextLong'
 import Button from '@nextcloud/vue/dist/Components/Button'
+
+import { fields } from '../utils'
 
 export default {
 	name: 'CreationForm',
@@ -45,6 +61,7 @@ export default {
 		CheckIcon,
 		UndoIcon,
 		TextIcon,
+		TextLongIcon,
 		Button,
 	},
 
@@ -53,8 +70,8 @@ export default {
 
 	data() {
 		return {
-			name: '',
-			comment: '',
+			newRoom: {},
+			fields,
 		}
 	},
 
@@ -69,11 +86,7 @@ export default {
 
 	methods: {
 		onOkClick() {
-			const room = {
-				name: this.name,
-				comment: this.comment,
-			}
-			this.$emit('ok-clicked', room)
+			this.$emit('ok-clicked', this.newRoom)
 		},
 	},
 }
@@ -90,7 +103,7 @@ export default {
 	.fields {
 		display: flex;
 		flex-direction: column;
-		.field {
+		.field > * {
 			display: flex;
 			align-items: center;
 			> * {
