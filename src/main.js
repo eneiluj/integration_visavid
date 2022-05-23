@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import './bootstrap'
-import App from './app'
+import App from './App'
 
 import { generateUrl, generateOcsUrl } from '@nextcloud/router'
 import { dirname } from '@nextcloud/paths'

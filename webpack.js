@@ -11,7 +11,7 @@ webpackConfig.stats = {
 }
 
 webpackConfig.entry = {
-    main: { import: path.join(__dirname, 'src', 'main.js'), filename: 'visavid-main.js' },
+    main: { import: path.join(__dirname, 'src', 'main.js'), filename: 'integration_visavid-main.js' },
 }
 
 module.exports = webpackConfig

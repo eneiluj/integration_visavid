@@ -18,4 +18,13 @@
     <dependencies>
         <nextcloud min-version="22" max-version="25"/>
     </dependencies>
+	<navigations>
+		<navigation>
+			<id>integration_visavid</id>
+			<name>Visavid</name>
+			<route>integration_visavid.page.index</route>
+			<icon>app.svg</icon>
+			<order>8</order>
+		</navigation>
+	</navigations>
 </info>
