@@ -3,6 +3,38 @@
 		<h2>
 			{{ room.name }}
 		</h2>
+		<div class="links">
+			<div class="link">
+				<LinkVariantIcon :size="20" />
+				<label>
+					{{ t('integration_visavid', 'Public room link') }}
+				</label>
+				<input type="text" :readonly="true" :value="publicLink" />
+				<a :href="publicLink" @click.prevent.stop="onGuestLinkClick">
+					<Button v-tooltip.bottom="{ content: t('integration_visavid', 'Copy to clipboard') }">
+						<template #icon>
+							<ClipboardArrowLeftOutlineIcon
+								:size="20"/>
+						</template>
+					</Button>
+				</a>
+			</div>
+			<div class="link">
+				<ShieldLinkVariantIcon :size="20" />
+				<label>
+					{{ t('integration_visavid', 'Admin room link') }}
+				</label>
+				<input type="text" :readonly="true" :value="adminLink" />
+				<a :href="adminLink" @click.prevent.stop="onAdminLinkClick">
+					<Button v-tooltip.bottom="{ content: t('integration_visavid', 'Copy to clipboard') }">
+						<template #icon>
+							<ClipboardArrowLeftOutlineIcon
+								:size="20"/>
+						</template>
+					</Button>
+				</a>
+			</div>
+		</div>
 		<div class="fields">
 			<div v-for="field in fields"
 				 :key="field.id"
@@ -25,6 +57,15 @@
 						{{ room[field.id] }}
 					</label>
 				</div>
+				<div v-else-if="field.type === 'select'">
+					<FormatListBulletedTypeIcon :size="20" />
+					<label>
+						{{ field.label }}
+					</label>
+					<label :for="'room-' + field.id + '-value'">
+						{{ room[field.id].label }}
+					</label>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -32,8 +73,13 @@
 
 <script>
 import { fields } from '../utils'
+import ShieldLinkVariantIcon from 'vue-material-design-icons/ShieldLinkVariant'
+import LinkVariantIcon from 'vue-material-design-icons/LinkVariant'
 import TextIcon from 'vue-material-design-icons/Text'
 import TextLongIcon from 'vue-material-design-icons/TextLong'
+import FormatListBulletedTypeIcon from 'vue-material-design-icons/FormatListBulletedType'
+import ClipboardArrowLeftOutlineIcon from 'vue-material-design-icons/ClipboardArrowLeftOutline'
+import Button from '@nextcloud/vue/dist/Components/Button'
 
 export default {
 	name: 'RoomDetails',
@@ -41,6 +87,11 @@ export default {
 	components: {
 		TextLongIcon,
 		TextIcon,
+		FormatListBulletedTypeIcon,
+		LinkVariantIcon,
+		ShieldLinkVariantIcon,
+		ClipboardArrowLeftOutlineIcon,
+		Button,
 	},
 
 	props: {
@@ -63,9 +114,21 @@ export default {
 	},
 
 	computed: {
+		publicLink() {
+			return 'https://public/' + this.room.name + '/PUBLIC_TOKEN'
+		},
+		adminLink() {
+			return 'https://admin/' + this.room.name + '/ADMIN_TOKEN'
+		},
 	},
 
 	methods: {
+		onGuestLinkClick() {
+			console.debug('click guest link')
+		},
+		onAdminLinkClick() {
+			console.debug('click admin link')
+		},
 	},
 }
 </script>
@@ -76,12 +139,40 @@ export default {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	h2 {
+		margin: 12px 0 32px 0;
+	}
 	.fields {
 		display: flex;
 		flex-direction: column;
 		.field > * {
 			display: flex;
 			align-items: center;
+			margin: 5px 0 5px 0;
+			> * {
+				margin: 0 8px 0 8px;
+			}
+			label {
+				width: 150px;
+			}
+		}
+	}
+	.links {
+		display: flex;
+		flex-direction: column;
+		.link {
+			display: flex;
+			align-items: center;
+			margin: 6px 0 6px 0;
+			> * {
+				margin: 0 8px 0 8px;
+			}
+			label {
+				width: 150px;
+			}
+			input {
+				width: 250px;
+			}
 		}
 	}
 }

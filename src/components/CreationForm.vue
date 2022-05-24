@@ -23,8 +23,18 @@
 						{{ field.label }}
 					</label>
 					<textarea :id="'room-' + field.id"
-						v-model="newRoom[field.id]"
-						:placeholder="field.placeholder" />
+							  v-model="newRoom[field.id]"
+							  :placeholder="field.placeholder" />
+				</div>
+				<div v-else-if="field.type === 'select'">
+					<FormatListBulletedTypeIcon :size="20" />
+					<label :for="'room-' + field.id">
+						{{ field.label }}
+					</label>
+					<Multiselect v-model="newRoom[field.id]"
+						:options="field.options"
+						:placeholder="field.placeholder"
+						label="label" />
 				</div>
 			</div>
 		</div>
@@ -46,11 +56,14 @@
 </template>
 
 <script>
+import FormatListBulletedTypeIcon from 'vue-material-design-icons/FormatListBulletedType'
 import CheckIcon from 'vue-material-design-icons/Check'
 import UndoIcon from 'vue-material-design-icons/Undo'
 import TextIcon from 'vue-material-design-icons/Text'
 import TextLongIcon from 'vue-material-design-icons/TextLong'
 import Button from '@nextcloud/vue/dist/Components/Button'
+import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
+import { showError } from '@nextcloud/dialogs'
 
 import { fields } from '../utils'
 
@@ -62,7 +75,9 @@ export default {
 		UndoIcon,
 		TextIcon,
 		TextLongIcon,
+		FormatListBulletedTypeIcon,
 		Button,
+		Multiselect,
 	},
 
 	props: {
@@ -86,7 +101,16 @@ export default {
 
 	methods: {
 		onOkClick() {
-			this.$emit('ok-clicked', this.newRoom)
+			let isFormValid = true
+			this.fields.forEach((field) => {
+				if (!this.newRoom[field.id]) {
+					showError(t('integration_visavid', 'Field "{name}" is missing', { name: field.label }))
+					isFormValid = false
+				}
+			})
+			if (isFormValid) {
+				this.$emit('ok-clicked', this.newRoom)
+			}
 		},
 	},
 }
@@ -106,8 +130,15 @@ export default {
 		.field > * {
 			display: flex;
 			align-items: center;
+			margin: 5px 0 5px 0;
 			> * {
 				margin: 0 8px 0 8px;
+			}
+			label {
+				width: 150px;
+			}
+			*:last-child {
+				width: 250px;
 			}
 		}
 	}

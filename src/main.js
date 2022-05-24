@@ -9,8 +9,10 @@ import axios from '@nextcloud/axios'
 import moment from '@nextcloud/moment'
 import '../css/main.scss'
 import vueAwesomeCountdown from 'vue-awesome-countdown'
+import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
 
 Vue.use(vueAwesomeCountdown, 'vac')
+Vue.directive('tooltip', Tooltip)
 
 let lastPath = null
 

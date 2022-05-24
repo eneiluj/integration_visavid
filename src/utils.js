@@ -45,5 +45,16 @@ export const fields = [
 		type: 'textarea',
 		placeholder: t('integration_visavid', 'What is this room about?'),
 	},
+	{
+		id: 'type',
+		label: t('integration_visavid', 'Room type'),
+		type: 'select',
+		placeholder: t('integration_visavid', 'Select a room type'),
+		options: [
+			{ id: 'one', label: 'Type one' },
+			{ id: 'two', label: 'Type two' },
+			{ id: 'three', label: 'Type three' },
+		],
+	},
 ]
 
