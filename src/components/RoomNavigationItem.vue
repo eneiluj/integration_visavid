@@ -85,9 +85,7 @@ export default {
 	},
 	methods: {
 		onRoomClick(e) {
-			if (e.target.tagName === 'SPAN') {
-				this.$emit('room-clicked', this.room.id)
-			}
+			this.$emit('room-clicked', this.room.id)
 		},
 		onDeleteClick() {
 			this.deleting = true
