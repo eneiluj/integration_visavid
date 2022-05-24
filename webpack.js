@@ -12,6 +12,7 @@ webpackConfig.stats = {
 
 webpackConfig.entry = {
     main: { import: path.join(__dirname, 'src', 'main.js'), filename: 'integration_visavid-main.js' },
+	adminSettings: { import: path.join(__dirname, 'src', 'adminSettings.js'), filename: 'integration_visavid-adminSettings.js' },
 }
 
 module.exports = webpackConfig
