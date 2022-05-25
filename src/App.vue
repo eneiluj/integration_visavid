@@ -16,13 +16,7 @@
 			</template-->
 			<RoomDetails v-if="selectedRoom"
 				:room="selectedRoom" />
-			<EmptyContent v-else-if="state.is_configured">
-				<template #icon>
-					<VisavidIcon />
-				</template>
-				{{ t('integration_visavid', 'No selected room') }}
-			</EmptyContent>
-			<EmptyContent v-else>
+			<EmptyContent v-else-if="!state.is_configured">
 				<template #icon>
 					<CogIcon />
 				</template>
@@ -41,6 +35,26 @@
 					{{ t('integration_visavid', 'Ask your administrator to configure this integration') }}
 				</p>
 			</EmptyContent>
+			<EmptyContent v-else-if="roomCount === 0">
+				<template #icon>
+					<VisavidIcon />
+				</template>
+				{{ t('integration_visavid', 'No room') }}
+				<Button
+					class="createButton"
+					@click="onCreateRoomClick">
+					<template #icon>
+						<PlusIcon />
+					</template>
+					{{ t('integration_visavid', 'Create a room') }}
+				</Button>
+			</EmptyContent>
+			<EmptyContent v-else>
+				<template #icon>
+					<VisavidIcon />
+				</template>
+				{{ t('integration_visavid', 'No selected room') }}
+			</EmptyContent>
 		</AppContent>
 		<Modal v-if="creationModalOpen"
 			size="normal"
@@ -54,6 +68,7 @@
 
 <script>
 import CogIcon from 'vue-material-design-icons/Cog'
+import PlusIcon from 'vue-material-design-icons/Plus'
 import CheckIcon from 'vue-material-design-icons/Check'
 import Button from '@nextcloud/vue/dist/Components/Button'
 import AppContent from '@nextcloud/vue/dist/Components/AppContent'
@@ -81,6 +96,7 @@ export default {
 		VisavidNavigation,
 		CheckIcon,
 		CogIcon,
+		PlusIcon,
 		AppContent,
 		Content,
 		Modal,
@@ -112,6 +128,9 @@ export default {
 		selectedRoom() {
 			return this.rooms[this.selectedRoomId]
 		},
+		roomCount() {
+			return Object.keys(this.rooms).length
+		},
 	},
 
 	methods: {
@@ -128,6 +147,7 @@ export default {
 			room.id = nbRooms + 1
 			this.$set(this.rooms, room.id, room)
 			console.debug(this.rooms)
+			this.selectedRoomId = room.id
 		},
 		onRoomClicked(roomId) {
 			console.debug('select room', roomId)
@@ -151,6 +171,7 @@ body {
 	height: auto;
 }
 
+.createButton,
 .configureButton {
 	margin-top: 12px;
 }
