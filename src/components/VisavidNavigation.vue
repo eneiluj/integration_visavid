@@ -83,5 +83,16 @@ export default {
 }
 ::v-deep .roomItem {
 	padding-right: 0 !important;
+	&.selectedRoom {
+		> a,
+		> div {
+			background: var(--color-background-dark, lightgrey);
+		}
+
+		> a {
+			font-weight: bold;
+			color: var(--color-primary);
+		}
+	}
 }
 </style>

@@ -20,9 +20,9 @@
 		:force-menu="false"
 		@click="onRoomClick">
 		<template #icon>
-			<FolderIcon v-if="selected"
+			<ForumIcon v-if="selected"
 				:size="20"/>
-			<FolderOutlineIcon v-else
+			<ForumOutlineIcon v-else
 				:size="20"/>
 		</template>
 		<template #actions>
@@ -40,8 +40,8 @@
 
 <script>
 import DeleteIcon from 'vue-material-design-icons/Delete'
-import FolderIcon from 'vue-material-design-icons/Folder'
-import FolderOutlineIcon from 'vue-material-design-icons/FolderOutline'
+import ForumIcon from 'vue-material-design-icons/Forum'
+import ForumOutlineIcon from 'vue-material-design-icons/ForumOutline'
 import ClickOutside from 'vue-click-outside'
 
 import Actions from '@nextcloud/vue/dist/Components/Actions'
@@ -56,8 +56,8 @@ export default {
 		AppNavigationItem,
 		ActionButton,
 		Actions,
-		FolderIcon,
-		FolderOutlineIcon,
+		ForumIcon,
+		ForumOutlineIcon,
 		DeleteIcon,
 	},
 	directives: {
