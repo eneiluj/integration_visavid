@@ -30,8 +30,13 @@ export function delay(callback, ms) {
 	}
 }
 
+import HomeGroupIcon from 'vue-material-design-icons/HomeGroup'
+import AccountGroupIcon from 'vue-material-design-icons/AccountGroup'
+import AccountGroupOutlineIcon from 'vue-material-design-icons/AccountGroupOutline'
 import TextIcon from 'vue-material-design-icons/Text'
+import PaletteIcon from 'vue-material-design-icons/Palette'
 import PaletteSwatchIcon from 'vue-material-design-icons/PaletteSwatch'
+import PaletteSwatchOutlineIcon from 'vue-material-design-icons/PaletteSwatchOutline'
 import TextLongIcon from 'vue-material-design-icons/TextLong'
 import FormatListBulletedTypeIcon from 'vue-material-design-icons/FormatListBulletedType'
 
@@ -57,9 +62,9 @@ export const fields = {
 		type: 'select',
 		placeholder: t('integration_visavid', 'Select a room type'),
 		options: {
-			one: { id: 'one', label: 'Type one' },
-			two: { id: 'two', label: 'Type two' },
-			three: { id: 'three', label: 'Type three' },
+			one: { id: 'one', label: 'Type one', icon: AccountGroupIcon },
+			two: { id: 'two', label: 'Type two', icon: AccountGroupOutlineIcon },
+			three: { id: 'three', label: 'Type three', icon: HomeGroupIcon },
 		},
 	},
 	style: {
@@ -69,9 +74,9 @@ export const fields = {
 		type: 'radio',
 		default: 'two',
 		options: {
-			one: { label: 'Style one' },
-			two: { label: 'Style two' },
-			three: { label: 'Style three' },
+			one: { label: 'Style one', icon: PaletteSwatchIcon },
+			two: { label: 'Style two', icon: PaletteSwatchOutlineIcon },
+			three: { label: 'Style three', icon: PaletteIcon },
 		},
 	},
 }

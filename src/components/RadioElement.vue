@@ -9,7 +9,11 @@
 				type="radio"
 				name="permission"
 				:value="optionId">
-			<span class="perm-title">
+			<component v-if="option.icon"
+				:is="option.icon"
+				class="option-icon"
+				:size="20" />
+			<span class="option-title">
 				{{ option.label }}
 			</span>
 		</label>
@@ -82,7 +86,7 @@ export default {
 			width: 0;
 			margin: 0;
 		}
-		.perm-icon {
+		.option-icon {
 			margin: 0 12px 0 12px;
 		}
 	}

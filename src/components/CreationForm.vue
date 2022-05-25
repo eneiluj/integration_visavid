@@ -22,10 +22,28 @@
 					v-model="newRoom[fieldId]"
 					:placeholder="field.placeholder" />
 				<Multiselect v-else-if="field.type === 'select'"
-					v-model="newRoom[fieldId]"
+					:value="newRoom[fieldId]"
 					:options="Object.values(field.options)"
 					:placeholder="field.placeholder"
-					label="label" />
+					@input="setSelectValue(fieldId, $event)">
+					<template #option="{option}">
+						<component v-if="option.icon"
+							:is="option.icon"
+							class="option-icon"
+							:size="20" />
+						<span class="option-title">
+							{{ option.label }}
+						</span>
+					</template>
+					<template #singleLabel="{option}">
+						<component v-if="option.icon"
+							:is="option.icon"
+							:size="20" />
+						<span class="option-title">
+							{{ option.label }}
+						</span>
+					</template>
+				</Multiselect>
 				<RadioElement v-else-if="field.type === 'radio'"
 					:field-id="fieldId"
 					:options="field.options"
@@ -107,6 +125,12 @@ export default {
 				})
 			}
 		},
+		setSelectValue(fieldId, newValue) {
+			// this fixes the issue when selecting the currently select option
+			if (newValue !== null) {
+				this.$set(this.newRoom, fieldId, newValue)
+			}
+		},
 	},
 }
 </script>
@@ -134,6 +158,12 @@ export default {
 			}
 			*:last-child {
 				width: 250px;
+			}
+			.option-icon {
+				margin-left: 8px;
+			}
+			.option-title {
+				margin-left: 12px;
 			}
 		}
 	}
