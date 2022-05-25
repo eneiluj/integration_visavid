@@ -9,36 +9,40 @@
 				<label>
 					{{ t('integration_visavid', 'Public room link') }}
 				</label>
-				<input type="text" :readonly="true" :value="publicLink" />
-				<a :href="publicLink" @click.prevent.stop="copyLink(false)">
-					<Button v-tooltip.bottom="{ content: t('integration_visavid', 'Copy to clipboard') }">
-						<template #icon>
-							<ClipboardCheckOutlineIcon v-if="publicLinkCopied"
-								class="copiedIcon"
-								:size="20" />
-							<ClipboardArrowLeftOutlineIcon v-else
-								:size="20" />
-						</template>
-					</Button>
-				</a>
+				<div class="linkInputWrapper">
+					<input type="text" :readonly="true" :value="publicLink" />
+					<a :href="publicLink" @click.prevent.stop="copyLink(false)">
+						<Button v-tooltip.bottom="{ content: t('integration_visavid', 'Copy to clipboard') }">
+							<template #icon>
+								<ClipboardCheckOutlineIcon v-if="publicLinkCopied"
+									class="copiedIcon"
+									:size="20" />
+								<ClipboardArrowLeftOutlineIcon v-else
+									:size="20" />
+							</template>
+						</Button>
+					</a>
+				</div>
 			</div>
 			<div class="link">
 				<ShieldLinkVariantIcon :size="20" />
 				<label>
 					{{ t('integration_visavid', 'Admin room link') }}
 				</label>
-				<input type="text" :readonly="true" :value="adminLink" />
-				<a :href="adminLink" @click.prevent.stop="copyLink(true)">
-					<Button v-tooltip.bottom="{ content: t('integration_visavid', 'Copy to clipboard') }">
-						<template #icon>
-							<ClipboardCheckOutlineIcon v-if="adminLinkCopied"
-								class="copiedIcon"
-								:size="20" />
-							<ClipboardArrowLeftOutlineIcon v-else
-								:size="20" />
-						</template>
-					</Button>
-				</a>
+				<div class="linkInputWrapper">
+					<input type="text" :readonly="true" :value="adminLink" />
+					<a :href="adminLink" @click.prevent.stop="copyLink(true)">
+						<Button v-tooltip.bottom="{ content: t('integration_visavid', 'Copy to clipboard') }">
+							<template #icon>
+								<ClipboardCheckOutlineIcon v-if="adminLinkCopied"
+									class="copiedIcon"
+									:size="20" />
+								<ClipboardArrowLeftOutlineIcon v-else
+									:size="20" />
+							</template>
+						</Button>
+					</a>
+				</div>
 			</div>
 		</div>
 		<div class="fields">
@@ -47,19 +51,23 @@
 				class="field">
 				<component v-if="field.icon"
 					:is="field.icon" :size="20" />
-				<label>
+				<label class="fieldLabel">
 					{{ field.label }}
 				</label>
-				<label v-if="['text', 'textarea'].includes(field.type)"
+				<label v-if="['text'].includes(field.type)"
 					:id="'room-' + fieldId + '-value'"
-					class="value">
+					class="fieldValue">
 					{{ room[fieldId] }}
 				</label>
+				<textarea v-if="['textarea'].includes(field.type)"
+					:id="'room-' + fieldId + '-value'"
+					class="fieldValue"
+					:readonly="true">{{ room[fieldId] }}</textarea>
 				<label v-else-if="['select', 'radio'].includes(field.type)"
 					:for="'room-' + fieldId + '-value'"
-					class="value">
+					class="fieldValue multiple">
 					<component v-if="field.options[room[fieldId]].icon"
-							   :is="field.options[room[fieldId]].icon" :size="20" />
+						:is="field.options[room[fieldId]].icon" :size="20" />
 					{{ field.options[room[fieldId]].label }}
 				</label>
 			</div>
@@ -164,18 +172,23 @@ export default {
 		.field {
 			display: flex;
 			align-items: center;
-			margin: 5px 0 5px 0;
+			margin: 6px 0 6px 0;
 			> * {
 				margin: 0 8px 0 8px;
 			}
-			label {
+			.fieldLabel {
 				width: 150px;
 			}
-			.value {
+			.fieldValue.multiple {
 				display: flex;
 				> * {
 					margin-right: 8px;
 				}
+			}
+			textarea.fieldValue {
+				width: 300px;
+				height: 65px;
+				resize: none;
 			}
 		}
 	}
@@ -192,8 +205,12 @@ export default {
 			label {
 				width: 150px;
 			}
-			input {
-				width: 250px;
+			.linkInputWrapper {
+				display: flex;
+				width: 300px;
+				input {
+					flex-grow: 1;
+				}
 			}
 			.copiedIcon {
 				color: var(--color-success);

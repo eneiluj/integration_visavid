@@ -165,6 +165,9 @@ export default {
 			.option-title {
 				margin-left: 12px;
 			}
+			textarea {
+				height: 65px;
+			}
 		}
 	}
 

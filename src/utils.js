@@ -42,21 +42,18 @@ import FormatListBulletedTypeIcon from 'vue-material-design-icons/FormatListBull
 
 export const fields = {
 	name: {
-		id: 'name',
 		icon: TextIcon,
-		label: t('integration_visavid', 'Room name'),
+		label: t('integration_visavid', 'Simple text'),
 		type: 'text',
-		placeholder: t('integration_visavid', 'Room name'),
+		placeholder: t('integration_visavid', 'blabla'),
 	},
 	comment: {
-		id: 'comment',
 		icon: TextLongIcon,
-		label: t('integration_visavid', 'Comment'),
+		label: t('integration_visavid', 'Text area'),
 		type: 'textarea',
-		placeholder: t('integration_visavid', 'What is this room about?'),
+		placeholder: t('integration_visavid', 'long text\nmultiline\n...'),
 	},
 	type: {
-		id: 'type',
 		icon: FormatListBulletedTypeIcon,
 		label: t('integration_visavid', 'Type'),
 		type: 'select',
@@ -68,7 +65,6 @@ export const fields = {
 		},
 	},
 	style: {
-		id: 'style',
 		icon: PaletteSwatchIcon,
 		label: t('integration_visavid', 'Style'),
 		type: 'radio',
