@@ -7,7 +7,8 @@
 			<div v-for="(field, fieldId) in fields"
 				:key="fieldId"
 				class="field">
-				<component :is="field.icon" :size="20" />
+				<component v-if="field.icon"
+					:is="field.icon" :size="20" />
 				<label :for="'room-' + fieldId">
 					{{ field.label }}
 				</label>
@@ -100,7 +101,10 @@ export default {
 				}
 			})
 			if (isFormValid) {
-				this.$emit('ok-clicked', this.newRoom)
+				this.$emit('ok-clicked', {
+					...this.newRoom,
+					type: this.newRoom.type.id,
+				})
 			}
 		},
 	},

@@ -43,9 +43,10 @@
 		</div>
 		<div class="fields">
 			<div v-for="(field, fieldId) in fields"
-				 :key="fieldId"
-				 class="field">
-				<component :is="field.icon" :size="20" />
+				:key="fieldId"
+				class="field">
+				<component v-if="field.icon"
+					:is="field.icon" :size="20" />
 				<label>
 					{{ field.label }}
 				</label>
@@ -53,11 +54,7 @@
 					:id="'room-' + fieldId + '-value'">
 					{{ room[fieldId] }}
 				</label>
-				<label v-else-if="field.type === 'select'"
-					:for="'room-' + fieldId + '-value'">
-					{{ field.options[room[fieldId].id].label }}
-				</label>
-				<label v-else-if="field.type === 'radio'"
+				<label v-else-if="['select', 'radio'].includes(field.type)"
 					:for="'room-' + fieldId + '-value'">
 					{{ field.options[room[fieldId]].label }}
 				</label>
