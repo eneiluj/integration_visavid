@@ -55,10 +55,12 @@ export default {
 	.option {
 		display: flex;
 		align-items: center;
-		width: 300px;
 		height: 44px;
 		border: 2px solid var(--color-border-dark);
 		border-bottom: 0;
+		* {
+			cursor: pointer !important;
+		}
 		&:first-child {
 			border-top-left-radius: var(--border-radius);
 			border-top-right-radius: var(--border-radius);

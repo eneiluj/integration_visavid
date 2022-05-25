@@ -51,11 +51,15 @@
 					{{ field.label }}
 				</label>
 				<label v-if="['text', 'textarea'].includes(field.type)"
-					:id="'room-' + fieldId + '-value'">
+					:id="'room-' + fieldId + '-value'"
+					class="value">
 					{{ room[fieldId] }}
 				</label>
 				<label v-else-if="['select', 'radio'].includes(field.type)"
-					:for="'room-' + fieldId + '-value'">
+					:for="'room-' + fieldId + '-value'"
+					class="value">
+					<component v-if="field.options[room[fieldId]].icon"
+							   :is="field.options[room[fieldId]].icon" :size="20" />
 					{{ field.options[room[fieldId]].label }}
 				</label>
 			</div>
@@ -166,6 +170,12 @@ export default {
 			}
 			label {
 				width: 150px;
+			}
+			.value {
+				display: flex;
+				> * {
+					margin-right: 8px;
+				}
 			}
 		}
 	}
