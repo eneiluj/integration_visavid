@@ -56,5 +56,15 @@ export const fields = [
 			{ id: 'three', label: 'Type three' },
 		],
 	},
+	{
+		id: 'style',
+		label: t('integration_visavid', 'Room style'),
+		type: 'radio',
+		options: [
+			{ id: 'one', label: 'Style one' },
+			{ id: 'two', label: 'Style two' },
+			{ id: 'three', label: 'Style three' },
+		],
+	},
 ]
 

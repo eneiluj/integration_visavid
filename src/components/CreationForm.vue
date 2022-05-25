@@ -36,6 +36,17 @@
 						:placeholder="field.placeholder"
 						label="label" />
 				</div>
+				<div v-else-if="field.type === 'radio'">
+					<FormatListBulletedTypeIcon :size="20" />
+					<label :for="'room-' + field.id">
+						{{ field.label }}
+					</label>
+					<RadioElement
+						:field-id="field.id"
+						:options="field.options"
+						:value="newRoom[field.id]"
+						@update:value="newRoom[field.id] = $event"/>
+				</div>
 			</div>
 		</div>
 		<div class="footer">
@@ -66,11 +77,13 @@ import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
 import { showError } from '@nextcloud/dialogs'
 
 import { fields } from '../utils'
+import RadioElement from './RadioElement'
 
 export default {
 	name: 'CreationForm',
 
 	components: {
+		RadioElement,
 		CheckIcon,
 		UndoIcon,
 		TextIcon,
@@ -85,7 +98,8 @@ export default {
 
 	data() {
 		return {
-			newRoom: {},
+			newRoom: { style: { id: 'two', label: 'plop' } },
+			// newRoom: {},
 			fields,
 		}
 	},
