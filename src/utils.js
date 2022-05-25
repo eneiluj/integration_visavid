@@ -1,5 +1,3 @@
-/* jshint esversion: 6 */
-
 export function Timer(callback, mydelay) {
 	let timerId
 	let start
@@ -32,21 +30,29 @@ export function delay(callback, ms) {
 	}
 }
 
+import TextIcon from 'vue-material-design-icons/Text'
+import PaletteSwatchIcon from 'vue-material-design-icons/PaletteSwatch'
+import TextLongIcon from 'vue-material-design-icons/TextLong'
+import FormatListBulletedTypeIcon from 'vue-material-design-icons/FormatListBulletedType'
+
 export const fields = {
 	name: {
 		id: 'name',
+		icon: TextIcon,
 		label: t('integration_visavid', 'Room name'),
 		type: 'text',
 		placeholder: t('integration_visavid', 'Room name'),
 	},
 	comment: {
 		id: 'comment',
+		icon: TextLongIcon,
 		label: t('integration_visavid', 'Comment'),
 		type: 'textarea',
 		placeholder: t('integration_visavid', 'What is this room about?'),
 	},
 	type: {
 		id: 'type',
+		icon: FormatListBulletedTypeIcon,
 		label: t('integration_visavid', 'Type'),
 		type: 'select',
 		placeholder: t('integration_visavid', 'Select a room type'),
@@ -58,6 +64,7 @@ export const fields = {
 	},
 	style: {
 		id: 'style',
+		icon: PaletteSwatchIcon,
 		label: t('integration_visavid', 'Style'),
 		type: 'radio',
 		default: 'two',

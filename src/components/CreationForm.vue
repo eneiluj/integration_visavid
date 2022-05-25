@@ -7,46 +7,29 @@
 			<div v-for="(field, fieldId) in fields"
 				:key="fieldId"
 				class="field">
-				<div v-if="field.type === 'text'">
-					<TextIcon :size="20" />
-					<label :for="'room-' + fieldId">
-						{{ field.label }}
-					</label>
-					<input :id="'room-' + fieldId"
-						v-model="newRoom[fieldId]"
-						type="text"
-						:placeholder="field.placeholder" />
-				</div>
-				<div v-else-if="field.type === 'textarea'">
-					<TextLongIcon :size="20" />
-					<label :for="'room-' + fieldId">
-						{{ field.label }}
-					</label>
-					<textarea :id="'room-' + fieldId"
-						v-model="newRoom[fieldId]"
-						:placeholder="field.placeholder" />
-				</div>
-				<div v-else-if="field.type === 'select'">
-					<FormatListBulletedTypeIcon :size="20" />
-					<label :for="'room-' + fieldId">
-						{{ field.label }}
-					</label>
-					<Multiselect v-model="newRoom[fieldId]"
-						:options="Object.values(field.options)"
-						:placeholder="field.placeholder"
-						label="label" />
-				</div>
-				<div v-else-if="field.type === 'radio'">
-					<FormatListBulletedTypeIcon :size="20" />
-					<label :for="'room-' + fieldId">
-						{{ field.label }}
-					</label>
-					<RadioElement
-						:field-id="fieldId"
-						:options="field.options"
-						:value="newRoom[fieldId]"
-						@update:value="newRoom[fieldId] = $event"/>
-				</div>
+				<component :is="field.icon" :size="20" />
+				<label :for="'room-' + fieldId">
+					{{ field.label }}
+				</label>
+				<input v-if="field.type === 'text'"
+					:id="'room-' + fieldId"
+					v-model="newRoom[fieldId]"
+					type="text"
+					:placeholder="field.placeholder" />
+				<textarea v-else-if="field.type === 'textarea'"
+					:id="'room-' + fieldId"
+					v-model="newRoom[fieldId]"
+					:placeholder="field.placeholder" />
+				<Multiselect v-else-if="field.type === 'select'"
+					v-model="newRoom[fieldId]"
+					:options="Object.values(field.options)"
+					:placeholder="field.placeholder"
+					label="label" />
+				<RadioElement v-else-if="field.type === 'radio'"
+					:field-id="fieldId"
+					:options="field.options"
+					:value="newRoom[fieldId]"
+					@update:value="newRoom[fieldId] = $event"/>
 			</div>
 		</div>
 		<div class="footer">
@@ -67,11 +50,8 @@
 </template>
 
 <script>
-import FormatListBulletedTypeIcon from 'vue-material-design-icons/FormatListBulletedType'
 import CheckIcon from 'vue-material-design-icons/Check'
 import UndoIcon from 'vue-material-design-icons/Undo'
-import TextIcon from 'vue-material-design-icons/Text'
-import TextLongIcon from 'vue-material-design-icons/TextLong'
 import Button from '@nextcloud/vue/dist/Components/Button'
 import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
 import { showError } from '@nextcloud/dialogs'
@@ -86,9 +66,6 @@ export default {
 		RadioElement,
 		CheckIcon,
 		UndoIcon,
-		TextIcon,
-		TextLongIcon,
-		FormatListBulletedTypeIcon,
 		Button,
 		Multiselect,
 	},
@@ -141,7 +118,7 @@ export default {
 	.fields {
 		display: flex;
 		flex-direction: column;
-		.field > * {
+		.field {
 			display: flex;
 			align-items: center;
 			margin: 5px 0 5px 0;

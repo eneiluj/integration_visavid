@@ -45,42 +45,22 @@
 			<div v-for="(field, fieldId) in fields"
 				 :key="fieldId"
 				 class="field">
-				<div v-if="field.type === 'text'">
-					<TextIcon :size="20" />
-					<label>
-						{{ field.label }}
-					</label>
-					<label :id="'room-' + fieldId + '-value'">
-						{{ room[fieldId] }}
-					</label>
-				</div>
-				<div v-else-if="field.type === 'textarea'">
-					<TextLongIcon :size="20" />
-					<label>
-						{{ field.label }}
-					</label>
-					<label :for="'room-' + fieldId + '-value'">
-						{{ room[fieldId] }}
-					</label>
-				</div>
-				<div v-else-if="field.type === 'select'">
-					<FormatListBulletedTypeIcon :size="20" />
-					<label>
-						{{ field.label }}
-					</label>
-					<label :for="'room-' + fieldId + '-value'">
-						{{ field.options[room[fieldId].id].label }}
-					</label>
-				</div>
-				<div v-else-if="field.type === 'radio'">
-					<FormatListBulletedTypeIcon :size="20" />
-					<label>
-						{{ field.label }}
-					</label>
-					<label :for="'room-' + fieldId + '-value'">
-						{{ field.options[room[fieldId]].label }}
-					</label>
-				</div>
+				<component :is="field.icon" :size="20" />
+				<label>
+					{{ field.label }}
+				</label>
+				<label v-if="['text', 'textarea'].includes(field.type)"
+					:id="'room-' + fieldId + '-value'">
+					{{ room[fieldId] }}
+				</label>
+				<label v-else-if="field.type === 'select'"
+					:for="'room-' + fieldId + '-value'">
+					{{ field.options[room[fieldId].id].label }}
+				</label>
+				<label v-else-if="field.type === 'radio'"
+					:for="'room-' + fieldId + '-value'">
+					{{ field.options[room[fieldId]].label }}
+				</label>
 			</div>
 		</div>
 	</div>
@@ -90,9 +70,6 @@
 import { fields, Timer } from '../utils'
 import ShieldLinkVariantIcon from 'vue-material-design-icons/ShieldLinkVariant'
 import LinkVariantIcon from 'vue-material-design-icons/LinkVariant'
-import TextIcon from 'vue-material-design-icons/Text'
-import TextLongIcon from 'vue-material-design-icons/TextLong'
-import FormatListBulletedTypeIcon from 'vue-material-design-icons/FormatListBulletedType'
 import ClipboardArrowLeftOutlineIcon from 'vue-material-design-icons/ClipboardArrowLeftOutline'
 import ClipboardCheckOutlineIcon from 'vue-material-design-icons/ClipboardCheckOutline'
 
@@ -103,9 +80,6 @@ export default {
 	name: 'RoomDetails',
 
 	components: {
-		TextLongIcon,
-		TextIcon,
-		FormatListBulletedTypeIcon,
 		LinkVariantIcon,
 		ShieldLinkVariantIcon,
 		ClipboardArrowLeftOutlineIcon,
@@ -186,7 +160,7 @@ export default {
 	.fields {
 		display: flex;
 		flex-direction: column;
-		.field > * {
+		.field {
 			display: flex;
 			align-items: center;
 			margin: 5px 0 5px 0;
