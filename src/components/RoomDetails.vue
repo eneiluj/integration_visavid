@@ -42,16 +42,16 @@
 			</div>
 		</div>
 		<div class="fields">
-			<div v-for="field in fields"
-				 :key="field.id"
+			<div v-for="(field, fieldId) in fields"
+				 :key="fieldId"
 				 class="field">
 				<div v-if="field.type === 'text'">
 					<TextIcon :size="20" />
 					<label>
 						{{ field.label }}
 					</label>
-					<label :id="'room-' + field.id + '-value'">
-						{{ room[field.id] }}
+					<label :id="'room-' + fieldId + '-value'">
+						{{ room[fieldId] }}
 					</label>
 				</div>
 				<div v-else-if="field.type === 'textarea'">
@@ -59,8 +59,8 @@
 					<label>
 						{{ field.label }}
 					</label>
-					<label :for="'room-' + field.id + '-value'">
-						{{ room[field.id] }}
+					<label :for="'room-' + fieldId + '-value'">
+						{{ room[fieldId] }}
 					</label>
 				</div>
 				<div v-else-if="field.type === 'select'">
@@ -68,8 +68,17 @@
 					<label>
 						{{ field.label }}
 					</label>
-					<label :for="'room-' + field.id + '-value'">
-						{{ room[field.id].label }}
+					<label :for="'room-' + fieldId + '-value'">
+						{{ field.options[room[fieldId].id].label }}
+					</label>
+				</div>
+				<div v-else-if="field.type === 'radio'">
+					<FormatListBulletedTypeIcon :size="20" />
+					<label>
+						{{ field.label }}
+					</label>
+					<label :for="'room-' + fieldId + '-value'">
+						{{ field.options[room[fieldId]].label }}
 					</label>
 				</div>
 			</div>

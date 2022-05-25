@@ -4,48 +4,48 @@
 			{{ t('integration_visavid', 'Create a room') }}
 		</h2>
 		<div class="fields">
-			<div v-for="field in fields"
-				:key="field.id"
+			<div v-for="(field, fieldId) in fields"
+				:key="fieldId"
 				class="field">
 				<div v-if="field.type === 'text'">
 					<TextIcon :size="20" />
-					<label :for="'room-' + field.id">
+					<label :for="'room-' + fieldId">
 						{{ field.label }}
 					</label>
-					<input :id="'room-' + field.id"
-						   v-model="newRoom[field.id]"
-						   type="text"
-						   :placeholder="field.placeholder" />
+					<input :id="'room-' + fieldId"
+						v-model="newRoom[fieldId]"
+						type="text"
+						:placeholder="field.placeholder" />
 				</div>
 				<div v-else-if="field.type === 'textarea'">
 					<TextLongIcon :size="20" />
-					<label :for="'room-' + field.id">
+					<label :for="'room-' + fieldId">
 						{{ field.label }}
 					</label>
-					<textarea :id="'room-' + field.id"
-							  v-model="newRoom[field.id]"
-							  :placeholder="field.placeholder" />
+					<textarea :id="'room-' + fieldId"
+						v-model="newRoom[fieldId]"
+						:placeholder="field.placeholder" />
 				</div>
 				<div v-else-if="field.type === 'select'">
 					<FormatListBulletedTypeIcon :size="20" />
-					<label :for="'room-' + field.id">
+					<label :for="'room-' + fieldId">
 						{{ field.label }}
 					</label>
-					<Multiselect v-model="newRoom[field.id]"
-						:options="field.options"
+					<Multiselect v-model="newRoom[fieldId]"
+						:options="Object.values(field.options)"
 						:placeholder="field.placeholder"
 						label="label" />
 				</div>
 				<div v-else-if="field.type === 'radio'">
 					<FormatListBulletedTypeIcon :size="20" />
-					<label :for="'room-' + field.id">
+					<label :for="'room-' + fieldId">
 						{{ field.label }}
 					</label>
 					<RadioElement
-						:field-id="field.id"
+						:field-id="fieldId"
 						:options="field.options"
-						:value="newRoom[field.id]"
-						@update:value="newRoom[field.id] = $event"/>
+						:value="newRoom[fieldId]"
+						@update:value="newRoom[fieldId] = $event"/>
 				</div>
 			</div>
 		</div>
@@ -98,8 +98,7 @@ export default {
 
 	data() {
 		return {
-			newRoom: { style: { id: 'two', label: 'plop' } },
-			// newRoom: {},
+			newRoom: { style: fields.style.default },
 			fields,
 		}
 	},
@@ -116,8 +115,9 @@ export default {
 	methods: {
 		onOkClick() {
 			let isFormValid = true
-			this.fields.forEach((field) => {
-				if (!this.newRoom[field.id]) {
+			Object.keys(this.fields).forEach((fieldId) => {
+				const field = this.fields[fieldId]
+				if (!this.newRoom[fieldId]) {
 					showError(t('integration_visavid', 'Field "{name}" is missing', { name: field.label }))
 					isFormValid = false
 				}

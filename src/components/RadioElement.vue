@@ -1,14 +1,14 @@
 <template>
 	<fieldset class="option-list">
-		<label v-for="option in options"
-			:key="option.id"
-			:class="{ option: true, selected: value.id === option.id }"
-			:for="fieldId + '-' + option.id"
-			@click="onUpdateValue(option)">
-			<input :id="fieldId + '-' + option.id"
+		<label v-for="(option, optionId) in options"
+			:key="optionId"
+			:class="{ option: true, selected: value === optionId }"
+			:for="fieldId + '-' + optionId"
+			@click="onUpdateValue(optionId)">
+			<input :id="fieldId + '-' + optionId"
 				type="radio"
 				name="permission"
-				:value="option.id">
+				:value="optionId">
 			<span class="perm-title">
 				{{ option.label }}
 			</span>
@@ -21,11 +21,11 @@ export default {
 	name: 'RadioElement',
 	props: {
 		options: {
-			type: Array,
+			type: Object,
 			required: true,
 		},
 		value: {
-			type: Object,
+			type: String,
 			required: true,
 		},
 		// to make sure the sub ids are unique

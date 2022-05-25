@@ -32,39 +32,40 @@ export function delay(callback, ms) {
 	}
 }
 
-export const fields = [
-	{
+export const fields = {
+	name: {
 		id: 'name',
 		label: t('integration_visavid', 'Room name'),
 		type: 'text',
 		placeholder: t('integration_visavid', 'Room name'),
 	},
-	{
+	comment: {
 		id: 'comment',
 		label: t('integration_visavid', 'Comment'),
 		type: 'textarea',
 		placeholder: t('integration_visavid', 'What is this room about?'),
 	},
-	{
+	type: {
 		id: 'type',
-		label: t('integration_visavid', 'Room type'),
+		label: t('integration_visavid', 'Type'),
 		type: 'select',
 		placeholder: t('integration_visavid', 'Select a room type'),
-		options: [
-			{ id: 'one', label: 'Type one' },
-			{ id: 'two', label: 'Type two' },
-			{ id: 'three', label: 'Type three' },
-		],
+		options: {
+			one: { id: 'one', label: 'Type one' },
+			two: { id: 'two', label: 'Type two' },
+			three: { id: 'three', label: 'Type three' },
+		},
 	},
-	{
+	style: {
 		id: 'style',
-		label: t('integration_visavid', 'Room style'),
+		label: t('integration_visavid', 'Style'),
 		type: 'radio',
-		options: [
-			{ id: 'one', label: 'Style one' },
-			{ id: 'two', label: 'Style two' },
-			{ id: 'three', label: 'Style three' },
-		],
+		default: 'two',
+		options: {
+			one: { label: 'Style one' },
+			two: { label: 'Style two' },
+			three: { label: 'Style three' },
+		},
 	},
-]
+}
 
