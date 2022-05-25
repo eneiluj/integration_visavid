@@ -10,11 +10,14 @@
 					{{ t('integration_visavid', 'Public room link') }}
 				</label>
 				<input type="text" :readonly="true" :value="publicLink" />
-				<a :href="publicLink" @click.prevent.stop="onGuestLinkClick">
+				<a :href="publicLink" @click.prevent.stop="copyLink(false)">
 					<Button v-tooltip.bottom="{ content: t('integration_visavid', 'Copy to clipboard') }">
 						<template #icon>
-							<ClipboardArrowLeftOutlineIcon
-								:size="20"/>
+							<ClipboardCheckOutlineIcon v-if="publicLinkCopied"
+								class="copiedIcon"
+								:size="20" />
+							<ClipboardArrowLeftOutlineIcon v-else
+								:size="20" />
 						</template>
 					</Button>
 				</a>
@@ -25,11 +28,14 @@
 					{{ t('integration_visavid', 'Admin room link') }}
 				</label>
 				<input type="text" :readonly="true" :value="adminLink" />
-				<a :href="adminLink" @click.prevent.stop="onAdminLinkClick">
+				<a :href="adminLink" @click.prevent.stop="copyLink(true)">
 					<Button v-tooltip.bottom="{ content: t('integration_visavid', 'Copy to clipboard') }">
 						<template #icon>
-							<ClipboardArrowLeftOutlineIcon
-								:size="20"/>
+							<ClipboardCheckOutlineIcon v-if="adminLinkCopied"
+								class="copiedIcon"
+								:size="20" />
+							<ClipboardArrowLeftOutlineIcon v-else
+								:size="20" />
 						</template>
 					</Button>
 				</a>
@@ -72,14 +78,17 @@
 </template>
 
 <script>
-import { fields } from '../utils'
+import { fields, Timer } from '../utils'
 import ShieldLinkVariantIcon from 'vue-material-design-icons/ShieldLinkVariant'
 import LinkVariantIcon from 'vue-material-design-icons/LinkVariant'
 import TextIcon from 'vue-material-design-icons/Text'
 import TextLongIcon from 'vue-material-design-icons/TextLong'
 import FormatListBulletedTypeIcon from 'vue-material-design-icons/FormatListBulletedType'
 import ClipboardArrowLeftOutlineIcon from 'vue-material-design-icons/ClipboardArrowLeftOutline'
+import ClipboardCheckOutlineIcon from 'vue-material-design-icons/ClipboardCheckOutline'
+
 import Button from '@nextcloud/vue/dist/Components/Button'
+import { showSuccess, showError } from '@nextcloud/dialogs'
 
 export default {
 	name: 'RoomDetails',
@@ -91,6 +100,7 @@ export default {
 		LinkVariantIcon,
 		ShieldLinkVariantIcon,
 		ClipboardArrowLeftOutlineIcon,
+		ClipboardCheckOutlineIcon,
 		Button,
 	},
 
@@ -104,6 +114,8 @@ export default {
 	data() {
 		return {
 			fields,
+			adminLinkCopied: false,
+			publicLinkCopied: false,
 		}
 	},
 
@@ -123,11 +135,31 @@ export default {
 	},
 
 	methods: {
-		onGuestLinkClick() {
-			console.debug('click guest link')
-		},
-		onAdminLinkClick() {
-			console.debug('click admin link')
+		async copyLink(admin = false) {
+			const link = admin
+				? this.adminLink
+				: this.publicLink
+			try {
+				await this.$copyText(link)
+				if (admin) {
+					this.adminLinkCopied = true
+					showSuccess(t('integration_visavid', 'Admin link copied!'))
+				} else {
+					this.publicLinkCopied = true
+					showSuccess(t('integration_visavid', 'Public link copied!'))
+				}
+				// eslint-disable-next-line
+				new Timer(() => {
+					if (admin) {
+						this.adminLinkCopied = false
+					} else {
+						this.publicLinkCopied = false
+					}
+				}, 5000)
+			} catch (error) {
+				console.error(error)
+				showError(t('integration_visavid', 'Link could not be copied to clipboard'))
+			}
 		},
 	},
 }
@@ -172,6 +204,9 @@ export default {
 			}
 			input {
 				width: 250px;
+			}
+			.copiedIcon {
+				color: var(--color-success);
 			}
 		}
 	}

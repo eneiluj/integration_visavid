@@ -10,9 +10,11 @@ import moment from '@nextcloud/moment'
 import '../css/main.scss'
 import vueAwesomeCountdown from 'vue-awesome-countdown'
 import Tooltip from '@nextcloud/vue/dist/Directives/Tooltip'
+import VueClipboard from 'vue-clipboard2'
 
 Vue.use(vueAwesomeCountdown, 'vac')
 Vue.directive('tooltip', Tooltip)
+Vue.use(VueClipboard)
 
 document.addEventListener('DOMContentLoaded', (event) => {
 	const View = Vue.extend(App)
