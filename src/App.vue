@@ -18,7 +18,7 @@
 				:room="selectedRoom" />
 			<EmptyContent v-else-if="state.is_configured">
 				<template #icon>
-					<CheckIcon />
+					<VisavidIcon />
 				</template>
 				{{ t('integration_visavid', 'No selected room') }}
 			</EmptyContent>
@@ -69,11 +69,13 @@ import { getCurrentUser } from '@nextcloud/auth'
 import VisavidNavigation from './components/VisavidNavigation'
 import CreationForm from './components/CreationForm'
 import RoomDetails from './components/RoomDetails'
+import VisavidIcon from './components/VisavidIcon'
 
 export default {
 	name: 'App',
 
 	components: {
+		VisavidIcon,
 		CreationForm,
 		RoomDetails,
 		VisavidNavigation,
