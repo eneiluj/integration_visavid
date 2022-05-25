@@ -55,24 +55,24 @@ export const fields = {
 	},
 	type: {
 		icon: FormatListBulletedTypeIcon,
-		label: t('integration_visavid', 'Type'),
+		label: t('integration_visavid', 'Multi select'),
 		type: 'select',
-		placeholder: t('integration_visavid', 'Select a room type'),
+		placeholder: t('integration_visavid', 'Select a value'),
 		options: {
-			one: { id: 'one', label: 'Type one', icon: AccountGroupIcon },
-			two: { id: 'two', label: 'Type two', icon: AccountGroupOutlineIcon },
-			three: { id: 'three', label: 'Type three', icon: HomeGroupIcon },
+			one: { id: 'one', label: 'First select value', icon: AccountGroupIcon },
+			two: { id: 'two', label: 'Second select value', icon: AccountGroupOutlineIcon },
+			three: { id: 'three', label: 'Third select value', icon: HomeGroupIcon },
 		},
 	},
 	style: {
 		icon: PaletteSwatchIcon,
-		label: t('integration_visavid', 'Style'),
+		label: t('integration_visavid', 'Radio selector'),
 		type: 'radio',
 		default: 'two',
 		options: {
-			one: { label: 'Style one', icon: PaletteSwatchIcon },
-			two: { label: 'Style two', icon: PaletteSwatchOutlineIcon },
-			three: { label: 'Style three', icon: PaletteIcon },
+			one: { label: 'First radio value', icon: PaletteSwatchIcon },
+			two: { label: 'Second radio value', icon: PaletteSwatchOutlineIcon },
+			three: { label: 'Third radio value', icon: PaletteIcon },
 		},
 	},
 }
