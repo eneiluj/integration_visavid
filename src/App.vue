@@ -16,11 +16,30 @@
 			</template-->
 			<RoomDetails v-if="selectedRoom"
 				:room="selectedRoom" />
-			<EmptyContent v-else>
+			<EmptyContent v-else-if="state.is_configured">
 				<template #icon>
 					<CheckIcon />
 				</template>
 				{{ t('integration_visavid', 'No selected room') }}
+			</EmptyContent>
+			<EmptyContent v-else>
+				<template #icon>
+					<CogIcon />
+				</template>
+				{{ t('integration_visavid', 'Application is not configured') }}
+				<a v-if="currentUser.isAdmin"
+				   :href="configureUrl">
+					<Button
+						class="configureButton">
+						<template #icon>
+							<CogIcon />
+						</template>
+						{{ t('integration_visavid', 'Configure Visavid integration') }}
+					</Button>
+				</a>
+				<p v-else>
+					{{ t('integration_visavid', 'Ask your administrator to configure this integration') }}
+				</p>
 			</EmptyContent>
 		</AppContent>
 		<Modal v-if="creationModalOpen"
@@ -34,16 +53,22 @@
 </template>
 
 <script>
+import CogIcon from 'vue-material-design-icons/Cog'
 import CheckIcon from 'vue-material-design-icons/Check'
-import { generateUrl } from '@nextcloud/router'
-import { basename } from '@nextcloud/paths'
-import VisavidNavigation from './components/VisavidNavigation'
+import Button from '@nextcloud/vue/dist/Components/Button'
 import AppContent from '@nextcloud/vue/dist/Components/AppContent'
-import RoomDetails from './components/RoomDetails'
 import Content from '@nextcloud/vue/dist/Components/Content'
 import Modal from '@nextcloud/vue/dist/Components/Modal'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
+
+import { generateUrl } from '@nextcloud/router'
+import { basename } from '@nextcloud/paths'
+import { loadState } from '@nextcloud/initial-state'
+import { getCurrentUser } from '@nextcloud/auth'
+
+import VisavidNavigation from './components/VisavidNavigation'
 import CreationForm from './components/CreationForm'
+import RoomDetails from './components/RoomDetails'
 
 export default {
 	name: 'App',
@@ -53,10 +78,12 @@ export default {
 		RoomDetails,
 		VisavidNavigation,
 		CheckIcon,
+		CogIcon,
 		AppContent,
 		Content,
 		Modal,
 		EmptyContent,
+		Button,
 	},
 
 	props: {
@@ -67,6 +94,9 @@ export default {
 			creationModalOpen: false,
 			rooms: {},
 			selectedRoomId: 0,
+			state: loadState('integration_visavid', 'page-state'),
+			currentUser: getCurrentUser(),
+			configureUrl: generateUrl('/settings/admin/connected-accounts'),
 		}
 	},
 
@@ -117,5 +147,9 @@ export default {
 body {
 	min-height: 100%;
 	height: auto;
+}
+
+.configureButton {
+	margin-top: 12px;
 }
 </style>

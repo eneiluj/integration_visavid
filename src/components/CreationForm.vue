@@ -41,13 +41,13 @@
 		<div class="footer">
 			<Button @click="$emit('cancel-clicked')">
 				<template #icon>
-					<UndoIcon :size="20" />
+					<UndoIcon />
 				</template>
 				{{ t('integration_visavid', 'Cancel') }}
 			</Button>
 			<Button type="primary" @click="onOkClick">
 				<template #icon>
-					<CheckIcon :size="20" />
+					<CheckIcon />
 				</template>
 				{{ t('integration_visavid', 'Create') }}
 			</Button>

@@ -12,6 +12,8 @@
 namespace OCA\Visavid\Controller;
 
 use OCA\Visavid\Service\VisavidAPIService;
+use OCP\AppFramework\Services\IInitialState;
+use OCP\IConfig;
 use Psr\Log\LoggerInterface;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\TemplateResponse;
@@ -30,16 +32,22 @@ class PageController extends Controller {
 	 */
 	private $logger;
 	private VisavidAPIService $visavidAPIService;
+	private IConfig $config;
+	private IInitialState $initialStateService;
 
-	public function __construct(string   $appName,
-								IRequest $request,
-								LoggerInterface $logger,
+	public function __construct(string            $appName,
+								IRequest          $request,
+								IConfig           $config,
+								IInitialState     $initialStateService,
+								LoggerInterface   $logger,
 								VisavidAPIService $visavidAPIService,
-								?string  $userId) {
+								?string           $userId) {
 		parent::__construct($appName, $request);
 		$this->userId = $userId;
 		$this->logger = $logger;
 		$this->visavidAPIService = $visavidAPIService;
+		$this->config = $config;
+		$this->initialStateService = $initialStateService;
 	}
 
 	/**
@@ -49,6 +57,12 @@ class PageController extends Controller {
 	 * @return TemplateResponse
 	 */
 	public function index(): TemplateResponse {
+		$apiKey = $this->config->getAppValue(Application::APP_ID, 'api_key');
+		$baseUrl = $this->config->getAppValue(Application::APP_ID, 'base_url');
+		$pageInitialState = [
+			'is_configured' => ($apiKey && $baseUrl),
+		];
+		$this->initialStateService->provideInitialState('page-state', $pageInitialState);
 		return new TemplateResponse(Application::APP_ID, 'main', []);
 	}
 }
