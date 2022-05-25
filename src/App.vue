@@ -3,6 +3,7 @@
 		<VisavidNavigation
 			:rooms="rooms"
 			:selected-room-id="selectedRoomId"
+			:is-configured="state.is_configured"
 			@create-room-clicked="onCreateRoomClick"
 			@room-clicked="onRoomClicked"
 			@delete-room="onRoomDeleted" />

@@ -1,7 +1,7 @@
 <template>
 	<AppNavigation>
 		<template #list>
-			<AppNavigationItem
+			<AppNavigationItem v-if="isConfigured"
 				class="addRoomItem"
 				:title="t('integration_visavid', 'New room')"
 				@click="onCreateRoomClick">
@@ -10,7 +10,7 @@
 				</template>
 			</AppNavigationItem>
 			<RoomNavigationItem
-				v-for="room, id in rooms"
+				v-for="(room, id) in rooms"
 				:key="id"
 				class="roomItem"
 				:room="room"
@@ -45,6 +45,10 @@ export default {
 		},
 		selectedRoomId: {
 			type: Number,
+			required: true,
+		},
+		isConfigured: {
+			type: Boolean,
 			required: true,
 		},
 	},
