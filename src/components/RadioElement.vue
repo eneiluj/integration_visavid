@@ -3,6 +3,7 @@
 		<label v-for="(option, optionId) in options"
 			:key="optionId"
 			:class="{ option: true, selected: value === optionId }"
+			:style="{ '--border-radius': borderRadius ? borderRadius + 'px' : borderRadius }"
 			:for="fieldId + '-' + optionId"
 			@click="onUpdateValue(optionId)">
 			<input :id="fieldId + '-' + optionId"
@@ -36,6 +37,10 @@ export default {
 		fieldId: {
 			type: String,
 			required: true,
+		},
+		borderRadius: {
+			type: Number,
+			default: undefined,
 		},
 	},
 
