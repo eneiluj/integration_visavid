@@ -27,13 +27,13 @@
 					label="label"
 					:placeholder="field.placeholder"
 					@input="setSelectValue(fieldId, $event)"
-					@search-change="onSearchChange">
+					@search-change="query = $event">
 					<template #option="{option}">
 						<component v-if="option.icon"
 							:is="option.icon"
 							class="option-icon"
 							:size="20" />
-						<span class="option-title" v-html="getSelectOptionLabel(option.label)" />
+						<Highlight :text="option.label" :search="query" class="option-title" />
 					</template>
 					<template #singleLabel="{option}">
 						<component v-if="option.icon"
@@ -80,6 +80,7 @@ import CheckIcon from 'vue-material-design-icons/Check'
 import UndoIcon from 'vue-material-design-icons/Undo'
 import Button from '@nextcloud/vue/dist/Components/Button'
 import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
+import Highlight from '@nextcloud/vue/dist/Components/Highlight'
 import { showError } from '@nextcloud/dialogs'
 
 import { fields } from '../utils'
@@ -94,6 +95,7 @@ export default {
 		UndoIcon,
 		Button,
 		Multiselect,
+		Highlight,
 	},
 
 	props: {
@@ -138,14 +140,6 @@ export default {
 			if (newValue !== null) {
 				this.$set(this.newRoom, fieldId, newValue)
 			}
-		},
-		onSearchChange(query) {
-			this.query = query
-		},
-		getSelectOptionLabel(label) {
-			return this.query
-				? label.replaceAll(this.query, '<b>' + this.query + '</b>')
-				: label
 		},
 	},
 }
