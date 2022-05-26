@@ -67,6 +67,7 @@ export default {
 		align-items: center;
 		height: 44px;
 		border: 2px solid var(--color-border-dark);
+		// no bottom borders to avoid double borders between elements
 		border-bottom: 0;
 		* {
 			cursor: pointer !important;
@@ -76,21 +77,31 @@ export default {
 			border-top-right-radius: var(--border-radius);
 		}
 		&:last-child {
-			border-bottom: 2px solid var(--color-border-dark);
 			border-bottom-left-radius: var(--border-radius);
 			border-bottom-right-radius: var(--border-radius);
+			// last element must have a border
+			border-bottom: 2px solid var(--color-border-dark);
 		}
 		&:focus,
 		&:hover {
 			background: var(--color-background-hover);
+			// hovered elements have a bottom border and we remove the one of the following element
+			border: 2px solid var(--color-primary-element-light);
+			& + .option {
+				border-top: 0;
+			}
 		}
 		&.selected {
-			background: var(--color-primary-light-hover);
-			border-color: var(--color-primary);
-			border-bottom: 2px solid var(--color-primary);
-		}
-		&.selected + .option {
-			border-top: 0;
+			background: var(--color-primary-light);
+			// selected element has a bottom border and we remove the one of the following element
+			border: 2px solid var(--color-primary-element-light);
+			&:hover {
+				background: var(--color-primary-light-hover);
+				border: 2px solid var(--color-primary);
+			}
+			& + .option {
+				border-top: 0;
+			}
 		}
 		input {
 			// display: none;

@@ -73,6 +73,7 @@ export const fields = {
 			one: { label: 'First radio value', icon: PaletteSwatchIcon },
 			two: { label: 'Second radio value', icon: PaletteSwatchOutlineIcon },
 			three: { label: 'Third radio value', icon: PaletteIcon },
+			four: { label: 'Fourth radio value', icon: PaletteIcon },
 		},
 	},
 }
