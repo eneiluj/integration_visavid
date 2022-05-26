@@ -10,12 +10,17 @@
 				type="radio"
 				name="permission"
 				:value="optionId">
-			<component v-if="option.icon"
-				:is="option.icon"
-				class="option-icon"
-				:size="20" />
+			<span class="option-icon">
+				<slot name="icon" :option="option">
+					<component v-if="option.icon"
+						:is="option.icon"
+						:size="20" />
+				</slot>
+			</span>
 			<span class="option-title">
-				{{ option.label }}
+				<slot name="label" :option="option">
+					{{ option.label }}
+				</slot>
 			</span>
 		</label>
 	</fieldset>

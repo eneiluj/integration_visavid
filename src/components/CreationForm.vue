@@ -48,7 +48,14 @@
 					:field-id="fieldId"
 					:options="field.options"
 					:value="newRoom[fieldId]"
-					@update:value="newRoom[fieldId] = $event"/>
+					@update:value="newRoom[fieldId] = $event">
+					<!--template #icon="{option}">
+						{{ option.label }}
+					</template-->
+					<!--template #label="{option}">
+						lala
+					</template-->
+				</RadioElement>
 			</div>
 		</div>
 		<div class="footer">
