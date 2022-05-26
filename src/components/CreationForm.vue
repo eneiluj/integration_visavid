@@ -24,16 +24,16 @@
 				<Multiselect v-else-if="field.type === 'select'"
 					:value="newRoom[fieldId]"
 					:options="Object.values(field.options)"
+					label="label"
 					:placeholder="field.placeholder"
-					@input="setSelectValue(fieldId, $event)">
+					@input="setSelectValue(fieldId, $event)"
+					@search-change="onSearchChange">
 					<template #option="{option}">
 						<component v-if="option.icon"
 							:is="option.icon"
 							class="option-icon"
 							:size="20" />
-						<span class="option-title">
-							{{ option.label }}
-						</span>
+						<span class="option-title" v-html="getSelectOptionLabel(option.label)" />
 					</template>
 					<template #singleLabel="{option}">
 						<component v-if="option.icon"
@@ -103,6 +103,7 @@ export default {
 		return {
 			newRoom: { style: fields.style.default },
 			fields,
+			query: '',
 		}
 	},
 
@@ -137,6 +138,14 @@ export default {
 			if (newValue !== null) {
 				this.$set(this.newRoom, fieldId, newValue)
 			}
+		},
+		onSearchChange(query) {
+			this.query = query
+		},
+		getSelectOptionLabel(label) {
+			return this.query
+				? label.replaceAll(this.query, '<b>' + this.query + '</b>')
+				: label
 		},
 	},
 }
