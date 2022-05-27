@@ -65,7 +65,7 @@
 					class="fieldValue"
 					:value="room[fieldId]"
 					:readonly="true" />
-				<label v-else-if="['select', 'radio'].includes(field.type)"
+				<label v-else-if="['select', 'radio', 'ncradio'].includes(field.type)"
 					:for="'room-' + fieldId + '-value'"
 					class="fieldValue multiple">
 					<component :is="field.options[room[fieldId]].icon"

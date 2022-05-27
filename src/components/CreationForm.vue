@@ -64,7 +64,13 @@
 						:value="id"
 						:name="fieldId + '_radio'"
 						type="radio">
-						{{ option.label }}
+						<component :is="option.icon"
+							v-if="option.icon"
+							class="option-icon"
+							:size="20" />
+						<span class="option-title">
+							{{ option.label }}
+						</span>
 					</CheckboxRadioSwitch>
 				</div>
 			</div>
@@ -116,7 +122,8 @@ export default {
 
 	data() {
 		return {
-			newRoom: { style: fields.style.default, permissions: fields.permissions.default },
+			// newRoom: { style: fields.style.default, permissions: fields.permissions.default },
+			newRoom: {},
 			fields,
 			query: '',
 		}
@@ -126,6 +133,16 @@ export default {
 	},
 
 	watch: {
+	},
+
+	beforeMount() {
+		const roomWithDefaults = {}
+		Object.keys(fields).forEach((fieldId) => {
+			roomWithDefaults[fieldId] = fields[fieldId].default
+		})
+		this.newRoom = {
+			...roomWithDefaults,
+		}
 	},
 
 	mounted() {
@@ -175,12 +192,12 @@ export default {
 			margin: 5px 0 5px 0;
 			> * {
 				margin: 0 8px 0 8px;
+				&:last-child {
+					width: 250px;
+				}
 			}
 			label {
 				width: 150px;
-			}
-			*:last-child {
-				width: 250px;
 			}
 			.option-icon {
 				margin-left: 8px;
