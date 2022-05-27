@@ -87,6 +87,11 @@
 					class="fieldValue">
 					{{ room[fieldId] }}
 				</label>
+				<label v-else-if="['ncDate'].includes(field.type)"
+					:id="'room-' + fieldId + '-value'"
+					class="fieldValue">
+					{{ getFormattedDate(room[fieldId]) }}
+				</label>
 				<textarea v-if="['textarea'].includes(field.type)"
 					:id="'room-' + fieldId + '-value'"
 					class="fieldValue"
@@ -119,6 +124,7 @@
 
 <script>
 import { fields, Timer } from '../utils'
+import moment from '@nextcloud/moment'
 import ShieldLinkVariantIcon from 'vue-material-design-icons/ShieldLinkVariant'
 import LinkVariantIcon from 'vue-material-design-icons/LinkVariant'
 import ClipboardArrowLeftOutlineIcon from 'vue-material-design-icons/ClipboardArrowLeftOutline'
@@ -202,6 +208,9 @@ export default {
 				console.error(error)
 				showError(t('integration_visavid', 'Link could not be copied to clipboard'))
 			}
+		},
+		getFormattedDate(date) {
+			return moment(date).format('LL')
 		},
 	},
 }

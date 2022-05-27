@@ -7,6 +7,7 @@ import PaletteIcon from 'vue-material-design-icons/Palette'
 import PaletteSwatchIcon from 'vue-material-design-icons/PaletteSwatch'
 import PaletteSwatchOutlineIcon from 'vue-material-design-icons/PaletteSwatchOutline'
 import TextLongIcon from 'vue-material-design-icons/TextLong'
+import CalendarMonthIcon from 'vue-material-design-icons/CalendarMonth'
 import FormatListBulletedTypeIcon from 'vue-material-design-icons/FormatListBulletedType'
 
 export function Timer(callback, mydelay) {
@@ -55,6 +56,12 @@ export const fields = {
 		type: 'textarea',
 		placeholder: t('integration_visavid', 'long text\nplaceholder\n...'),
 		default: 'optional\ndefault\nvalue',
+	},
+	date: {
+		icon: CalendarMonthIcon,
+		label: t('integration_visavid', 'Date'),
+		type: 'ncDate',
+		default: new Date('2022-12-29'),
 	},
 	share: {
 		icon: ShareVariantIcon,

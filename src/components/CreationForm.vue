@@ -23,6 +23,15 @@
 					:id="'room-' + fieldId"
 					v-model="newRoom[fieldId]"
 					:placeholder="field.placeholder" />
+				<div v-else-if="field.type === 'ncDate'">
+					<DatetimePicker
+						:id="'room-' + fieldId"
+						v-model="newRoom[fieldId]"
+						type="date"
+						:placeholder="field.placeholder"
+						:clearable="true"
+						:confirm="false" />
+				</div>
 				<Multiselect v-else-if="field.type === 'select'"
 					:value="newRoom[fieldId]"
 					:options="Object.values(field.options)"
@@ -139,6 +148,7 @@ import CheckIcon from 'vue-material-design-icons/Check'
 import UndoIcon from 'vue-material-design-icons/Undo'
 import Button from '@nextcloud/vue/dist/Components/Button'
 import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
+import DatetimePicker from '@nextcloud/vue/dist/Components/DatetimePicker'
 import Highlight from '@nextcloud/vue/dist/Components/Highlight'
 import CheckboxRadioSwitch from '@nextcloud/vue/dist/Components/CheckboxRadioSwitch'
 import { showError } from '@nextcloud/dialogs'
@@ -155,6 +165,7 @@ export default {
 		UndoIcon,
 		Button,
 		Multiselect,
+		DatetimePicker,
 		Highlight,
 		CheckboxRadioSwitch,
 	},
