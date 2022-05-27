@@ -39,6 +39,7 @@
 					<template #singleLabel="{option}">
 						<component :is="option.icon"
 							v-if="option.icon"
+							class="multiselect-label-icon"
 							:size="20" />
 						<span class="option-title">
 							{{ option.label }}
@@ -201,10 +202,14 @@ export default {
 				width: 150px;
 			}
 			.option-icon {
-				margin-left: 8px;
+				margin-left: 4px;
+				margin-right: 8px;
+			}
+			.multiselect-label-icon {
+				margin-right: 12px;
 			}
 			.option-title {
-				margin-left: 12px;
+				// nothing
 			}
 			.multiselect-option-title {
 				text-overflow: ellipsis;

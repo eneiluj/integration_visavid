@@ -64,6 +64,7 @@ export const fields = {
 			one: { id: 'one', label: 'First multiselect value', icon: AccountGroupIcon },
 			two: { id: 'two', label: 'Second multiselect value', icon: AccountGroupOutlineIcon },
 			three: { id: 'three', label: 'Third multiselect long long long value', icon: HomeGroupIcon },
+			four: { id: 'four', label: 'Fourth multiselect value without icon' },
 		},
 		default: { id: 'one', label: 'First multiselect value', icon: AccountGroupIcon },
 	},
