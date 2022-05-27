@@ -92,4 +92,16 @@ export const fields = {
 		},
 		default: 'three',
 	},
+	acls: {
+		icon: PaletteSwatchIcon,
+		label: t('integration_visavid', 'Classic multi checkbox selector'),
+		type: 'nccheckbox',
+		options: {
+			one: { label: 'First radio value', icon: PaletteSwatchIcon },
+			two: { label: 'Second radio value', icon: PaletteSwatchOutlineIcon },
+			three: { label: 'Third radio value with long text', icon: PaletteIcon },
+			four: { label: 'Fourth radio value without icon' },
+		},
+		default: ['one', 'three'],
+	},
 }

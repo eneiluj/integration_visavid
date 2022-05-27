@@ -73,6 +73,18 @@
 						:size="20" />
 					{{ field.options[room[fieldId]].label }}
 				</label>
+				<label v-else-if="['nccheckbox'].includes(field.type)"
+					:for="'room-' + fieldId + '-value'"
+					class="fieldValue multipleVertical">
+					<div v-for="optionId in room[fieldId]"
+						:key="optionId"
+						class="oneValue">
+						<component :is="field.options[optionId].icon"
+							v-if="field.options[optionId].icon"
+							:size="20" />
+						{{ field.options[optionId].label }}
+					</div>
+				</label>
 			</div>
 		</div>
 	</div>
@@ -175,17 +187,34 @@ export default {
 		.field {
 			display: flex;
 			align-items: center;
-			margin: 6px 0 6px 0;
+			margin: 8px 0;
+			padding: 8px;
+			border-radius: var(--border-radius);
+			&:hover {
+				background-color: var(--color-background-hover);
+			}
 			> * {
 				margin: 0 8px 0 8px;
 			}
 			.fieldLabel {
 				width: 150px;
 			}
-			.fieldValue.multiple {
-				display: flex;
-				> * {
-					margin-right: 8px;
+			.fieldValue {
+				&.multiple {
+					display: flex;
+					> * {
+						margin-right: 8px;
+					}
+				}
+				&.multipleVertical {
+					display: flex;
+					flex-direction: column;
+					.oneValue {
+						display: flex;
+						> * {
+							margin-right: 8px;
+						}
+					}
 				}
 			}
 			textarea.fieldValue {

@@ -75,6 +75,22 @@
 						</span>
 					</CheckboxRadioSwitch>
 				</div>
+				<div v-else-if="field.type === 'nccheckbox'">
+					<CheckboxRadioSwitch v-for="(option, id) in field.options"
+						:key="id"
+						:checked.sync="newRoom[fieldId]"
+						:value="id"
+						:name="fieldId + '_radio'"
+						class="ncradio">
+						<component :is="option.icon"
+							v-if="option.icon"
+							class="option-icon"
+							:size="20" />
+						<span class="option-title">
+							{{ option.label }}
+						</span>
+					</CheckboxRadioSwitch>
+				</div>
 			</div>
 		</div>
 		<div class="footer">
@@ -192,6 +208,11 @@ export default {
 			display: flex;
 			align-items: center;
 			margin: 5px 0 5px 0;
+			padding: 8px;
+			border-radius: var(--border-radius-large);
+			&:hover {
+				background-color: var(--color-background-hover);
+			}
 			> * {
 				margin: 0 8px 0 8px;
 				&:last-child {
