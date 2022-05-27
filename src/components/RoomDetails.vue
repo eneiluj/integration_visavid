@@ -56,6 +56,19 @@
 				<label class="fieldLabel">
 					{{ field.label }}
 				</label>
+				<label v-if="['ncCheckbox'].includes(field.type)"
+					:id="'room-' + fieldId + '-value'"
+					class="fieldValue multiple">
+					<component :is="field.enabledIcon"
+						v-if="room[fieldId] && field.enabledIcon"
+						:size="20" />
+					<component :is="field.disabledIcon"
+						v-else-if="!room[fieldId] && field.disabledIcon"
+						:size="20" />
+					<CheckboxMarkedIcon v-else-if="room[fieldId]" :size="20" />
+					<CheckboxBlankOutlineIcon v-else-if="!room[fieldId]" :size="20" />
+					{{ room[fieldId] ? t('integration_visavid', 'Enabled') : t('integration_visavid', 'Disabled') }}
+				</label>
 				<label v-if="['ncswitch'].includes(field.type)"
 					:id="'room-' + fieldId + '-value'"
 					class="fieldValue multiple">
@@ -79,7 +92,7 @@
 					class="fieldValue"
 					:value="room[fieldId]"
 					:readonly="true" />
-				<label v-else-if="['select', 'radio', 'ncradio'].includes(field.type)"
+				<label v-else-if="['select', 'customRadioSet', 'ncRadioSet'].includes(field.type)"
 					:for="'room-' + fieldId + '-value'"
 					class="fieldValue multiple">
 					<component :is="field.options[room[fieldId]].icon"
@@ -87,7 +100,7 @@
 						:size="20" />
 					{{ field.options[room[fieldId]].label }}
 				</label>
-				<label v-else-if="['nccheckbox'].includes(field.type)"
+				<label v-else-if="['ncCheckboxSet'].includes(field.type)"
 					:for="'room-' + fieldId + '-value'"
 					class="fieldValue multipleVertical">
 					<div v-for="optionId in room[fieldId]"
@@ -112,6 +125,8 @@ import ClipboardArrowLeftOutlineIcon from 'vue-material-design-icons/ClipboardAr
 import ClipboardCheckOutlineIcon from 'vue-material-design-icons/ClipboardCheckOutline'
 import ToggleSwitchIcon from 'vue-material-design-icons/ToggleSwitch'
 import ToggleSwitchOffOutlineIcon from 'vue-material-design-icons/ToggleSwitchOffOutline'
+import CheckboxMarkedIcon from 'vue-material-design-icons/CheckboxMarked'
+import CheckboxBlankOutlineIcon from 'vue-material-design-icons/CheckboxBlankOutline'
 
 import Button from '@nextcloud/vue/dist/Components/Button'
 import { showSuccess, showError } from '@nextcloud/dialogs'
@@ -126,6 +141,8 @@ export default {
 		ClipboardCheckOutlineIcon,
 		ToggleSwitchIcon,
 		ToggleSwitchOffOutlineIcon,
+		CheckboxBlankOutlineIcon,
+		CheckboxMarkedIcon,
 		Button,
 	},
 

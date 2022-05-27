@@ -8,9 +8,9 @@
 				:key="fieldId"
 				class="field">
 				<component :is="field.icon"
-					v-if="field.icon && !['ncswitch'].includes(field.type)"
+					v-if="field.icon && !['ncswitch', 'ncCheckbox'].includes(field.type)"
 					:size="20" />
-				<label v-if="!['ncswitch'].includes(field.type)"
+				<label v-if="!['ncswitch', 'ncCheckbox'].includes(field.type)"
 					:for="'room-' + fieldId">
 					{{ field.label }}
 				</label>
@@ -47,7 +47,7 @@
 						</span>
 					</template>
 				</Multiselect>
-				<RadioElement v-else-if="field.type === 'radio'"
+				<RadioElement v-else-if="field.type === 'customRadioSet'"
 					:field-id="fieldId"
 					:options="field.options"
 					:value="newRoom[fieldId]"
@@ -59,7 +59,7 @@
 						lala
 					</template-->
 				</RadioElement>
-				<div v-else-if="field.type === 'ncradio'">
+				<div v-else-if="field.type === 'ncRadioSet'">
 					<CheckboxRadioSwitch v-for="(option, id) in field.options"
 						:key="id"
 						:checked.sync="newRoom[fieldId]"
@@ -76,7 +76,7 @@
 						</span>
 					</CheckboxRadioSwitch>
 				</div>
-				<div v-else-if="field.type === 'nccheckbox'">
+				<div v-else-if="field.type === 'ncCheckboxSet'">
 					<CheckboxRadioSwitch v-for="(option, id) in field.options"
 						:key="id"
 						:checked.sync="newRoom[fieldId]"
@@ -96,6 +96,17 @@
 					<CheckboxRadioSwitch
 						:checked.sync="newRoom[fieldId]"
 						type="switch"
+						class="ncradio">
+						<component :is="field.icon"
+							v-if="field.icon"
+							class="option-icon"
+							:size="20" />
+						{{ field.label }}
+					</CheckboxRadioSwitch>
+				</div>
+				<div v-else-if="field.type === 'ncCheckbox'">
+					<CheckboxRadioSwitch
+						:checked.sync="newRoom[fieldId]"
 						class="ncradio">
 						<component :is="field.icon"
 							v-if="field.icon"

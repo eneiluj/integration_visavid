@@ -71,6 +71,21 @@ export const fields = {
 		// enabledIcon: TextIcon,
 		// disabledIcon: TextLongIcon,
 	},
+	check: {
+		icon: ShareVariantIcon,
+		label: t('integration_visavid', 'Checkbox'),
+		type: 'ncCheckbox',
+		default: true,
+		// enabledIcon: TextIcon,
+		// disabledIcon: TextLongIcon,
+	},
+	check2: {
+		label: t('integration_visavid', 'Checkbox without icon'),
+		type: 'ncCheckbox',
+		default: false,
+		// enabledIcon: TextIcon,
+		// disabledIcon: TextLongIcon,
+	},
 	type: {
 		icon: FormatListBulletedTypeIcon,
 		label: t('integration_visavid', 'Multi select'),
@@ -87,7 +102,7 @@ export const fields = {
 	style: {
 		icon: PaletteSwatchIcon,
 		label: t('integration_visavid', 'Custom radio selector'),
-		type: 'radio',
+		type: 'customRadioSet',
 		options: {
 			one: { label: 'First radio value', icon: PaletteSwatchIcon },
 			two: { label: 'Second radio value', icon: PaletteSwatchOutlineIcon },
@@ -99,7 +114,7 @@ export const fields = {
 	permissions: {
 		icon: PaletteSwatchIcon,
 		label: t('integration_visavid', 'Classic Radio selector'),
-		type: 'ncradio',
+		type: 'ncRadioSet',
 		options: {
 			one: { label: 'First radio value', icon: PaletteSwatchIcon },
 			two: { label: 'Second radio value', icon: PaletteSwatchOutlineIcon },
@@ -111,7 +126,7 @@ export const fields = {
 	acls: {
 		icon: PaletteSwatchIcon,
 		label: t('integration_visavid', 'Classic multi checkbox selector'),
-		type: 'nccheckbox',
+		type: 'ncCheckboxSet',
 		options: {
 			one: { label: 'First radio value', icon: PaletteSwatchIcon },
 			two: { label: 'Second radio value', icon: PaletteSwatchOutlineIcon },
