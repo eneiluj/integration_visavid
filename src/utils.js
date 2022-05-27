@@ -61,11 +61,11 @@ export const fields = {
 		type: 'select',
 		placeholder: t('integration_visavid', 'Select a value'),
 		options: {
-			one: { id: 'one', label: 'First select value', icon: AccountGroupIcon },
-			two: { id: 'two', label: 'Second select value', icon: AccountGroupOutlineIcon },
-			three: { id: 'three', label: 'Third select value', icon: HomeGroupIcon },
+			one: { id: 'one', label: 'First multiselect value', icon: AccountGroupIcon },
+			two: { id: 'two', label: 'Second multiselect value', icon: AccountGroupOutlineIcon },
+			three: { id: 'three', label: 'Third multiselect long long long value', icon: HomeGroupIcon },
 		},
-		default: { id: 'three', label: 'Third select value', icon: HomeGroupIcon },
+		default: { id: 'one', label: 'First multiselect value', icon: AccountGroupIcon },
 	},
 	style: {
 		icon: PaletteSwatchIcon,

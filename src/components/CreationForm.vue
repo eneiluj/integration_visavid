@@ -34,7 +34,7 @@
 							v-if="option.icon"
 							class="option-icon"
 							:size="20" />
-						<Highlight :text="option.label" :search="query" class="option-title" />
+						<Highlight :text="option.label" :search="query" class="option-title multiselect-option-title" />
 					</template>
 					<template #singleLabel="{option}">
 						<component :is="option.icon"
@@ -205,6 +205,11 @@ export default {
 			}
 			.option-title {
 				margin-left: 12px;
+			}
+			.multiselect-option-title {
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
 			}
 			textarea {
 				height: 65px;
