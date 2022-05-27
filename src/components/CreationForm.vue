@@ -63,7 +63,8 @@
 						:checked.sync="newRoom[fieldId]"
 						:value="id"
 						:name="fieldId + '_radio'"
-						type="radio">
+						type="radio"
+						class="ncradio">
 						<component :is="option.icon"
 							v-if="option.icon"
 							class="option-icon"
@@ -207,6 +208,15 @@ export default {
 			}
 			textarea {
 				height: 65px;
+			}
+			// this fixes the multiline radio label
+			::v-deep .ncradio > label {
+				height: unset !important;
+				min-height: 44px;
+				> * {
+					margin-top: 8px;
+					margin-bottom: 8px;
+				}
 			}
 		}
 	}

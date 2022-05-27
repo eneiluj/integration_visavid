@@ -74,8 +74,8 @@ export const fields = {
 		options: {
 			one: { label: 'First radio value', icon: PaletteSwatchIcon },
 			two: { label: 'Second radio value', icon: PaletteSwatchOutlineIcon },
-			three: { label: 'Third radio value', icon: PaletteIcon },
-			four: { label: 'Fourth radio value without icon!!!!' },
+			three: { label: 'Third radio value with long long long text', icon: PaletteIcon },
+			four: { label: 'Fourth radio value without icon' },
 		},
 		default: 'two',
 	},
@@ -86,7 +86,7 @@ export const fields = {
 		options: {
 			one: { label: 'First radio value', icon: PaletteSwatchIcon },
 			two: { label: 'Second radio value', icon: PaletteSwatchOutlineIcon },
-			three: { label: 'Third radio value', icon: PaletteIcon },
+			three: { label: 'Third radio value with long text', icon: PaletteIcon },
 			four: { label: 'Fourth radio value without icon' },
 		},
 		default: 'three',
