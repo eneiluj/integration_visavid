@@ -12,8 +12,8 @@
 				:value="optionId">
 			<span class="option-icon">
 				<slot name="icon" :option="option">
-					<component v-if="option.icon"
-						:is="option.icon"
+					<component :is="option.icon"
+						v-if="option.icon"
 						:size="20" />
 				</slot>
 			</span>

@@ -57,13 +57,13 @@ export default {
 		}
 	},
 
+	computed: {
+	},
+
 	watch: {
 	},
 
 	mounted() {
-	},
-
-	computed: {
 	},
 
 	methods: {

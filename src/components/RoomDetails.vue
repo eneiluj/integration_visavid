@@ -10,7 +10,7 @@
 					{{ t('integration_visavid', 'Public room link') }}
 				</label>
 				<div class="linkInputWrapper">
-					<input type="text" :readonly="true" :value="publicLink" />
+					<input type="text" :readonly="true" :value="publicLink">
 					<a :href="publicLink" @click.prevent.stop="copyLink(false)">
 						<Button v-tooltip.bottom="{ content: t('integration_visavid', 'Copy to clipboard') }">
 							<template #icon>
@@ -30,7 +30,7 @@
 					{{ t('integration_visavid', 'Admin room link') }}
 				</label>
 				<div class="linkInputWrapper">
-					<input type="text" :readonly="true" :value="adminLink" />
+					<input type="text" :readonly="true" :value="adminLink">
 					<a :href="adminLink" @click.prevent.stop="copyLink(true)">
 						<Button v-tooltip.bottom="{ content: t('integration_visavid', 'Copy to clipboard') }">
 							<template #icon>
@@ -49,8 +49,8 @@
 			<div v-for="(field, fieldId) in fields"
 				:key="fieldId"
 				class="field">
-				<component v-if="field.icon"
-					:is="field.icon"
+				<component :is="field.icon"
+					v-if="field.icon"
 					:size="20" />
 				<label class="fieldLabel">
 					{{ field.label }}
@@ -68,8 +68,8 @@
 				<label v-else-if="['select', 'radio'].includes(field.type)"
 					:for="'room-' + fieldId + '-value'"
 					class="fieldValue multiple">
-					<component v-if="field.options[room[fieldId]].icon"
-						:is="field.options[room[fieldId]].icon"
+					<component :is="field.options[room[fieldId]].icon"
+						v-if="field.options[room[fieldId]].icon"
 						:size="20" />
 					{{ field.options[room[fieldId]].label }}
 				</label>
@@ -114,12 +114,6 @@ export default {
 		}
 	},
 
-	watch: {
-	},
-
-	mounted() {
-	},
-
 	computed: {
 		publicLink() {
 			return 'https://public/' + this.room.name + '/PUBLIC_TOKEN'
@@ -127,6 +121,12 @@ export default {
 		adminLink() {
 			return 'https://admin/' + this.room.name + '/ADMIN_TOKEN'
 		},
+	},
+
+	watch: {
+	},
+
+	mounted() {
 	},
 
 	methods: {

@@ -25,6 +25,7 @@ export default {
 	props: {
 		title: {
 			type: String,
+			default: '',
 		},
 		fillColor: {
 			type: String,
@@ -32,8 +33,8 @@ export default {
 		},
 		size: {
 			type: Number,
-			default: 24
-		}
+			default: 24,
+		},
 	},
 }
 </script>

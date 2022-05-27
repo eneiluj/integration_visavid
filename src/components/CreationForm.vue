@@ -7,8 +7,8 @@
 			<div v-for="(field, fieldId) in fields"
 				:key="fieldId"
 				class="field">
-				<component v-if="field.icon"
-					:is="field.icon"
+				<component :is="field.icon"
+					v-if="field.icon"
 					:size="20" />
 				<label :for="'room-' + fieldId">
 					{{ field.label }}
@@ -17,7 +17,7 @@
 					:id="'room-' + fieldId"
 					v-model="newRoom[fieldId]"
 					type="text"
-					:placeholder="field.placeholder" />
+					:placeholder="field.placeholder">
 				<textarea v-else-if="field.type === 'textarea'"
 					:id="'room-' + fieldId"
 					v-model="newRoom[fieldId]"
@@ -30,15 +30,15 @@
 					@input="setSelectValue(fieldId, $event)"
 					@search-change="query = $event">
 					<template #option="{option}">
-						<component v-if="option.icon"
-							:is="option.icon"
+						<component :is="option.icon"
+							v-if="option.icon"
 							class="option-icon"
 							:size="20" />
 						<Highlight :text="option.label" :search="query" class="option-title" />
 					</template>
 					<template #singleLabel="{option}">
-						<component v-if="option.icon"
-							:is="option.icon"
+						<component :is="option.icon"
+							v-if="option.icon"
 							:size="20" />
 						<span class="option-title">
 							{{ option.label }}
@@ -110,13 +110,13 @@ export default {
 		}
 	},
 
+	computed: {
+	},
+
 	watch: {
 	},
 
 	mounted() {
-	},
-
-	computed: {
 	},
 
 	methods: {

@@ -23,7 +23,7 @@
 				</template>
 				{{ t('integration_visavid', 'Application is not configured') }}
 				<a v-if="currentUser.isAdmin"
-				   :href="configureUrl">
+					:href="configureUrl">
 					<Button
 						class="configureButton">
 						<template #icon>
@@ -70,7 +70,6 @@
 <script>
 import CogIcon from 'vue-material-design-icons/Cog'
 import PlusIcon from 'vue-material-design-icons/Plus'
-import CheckIcon from 'vue-material-design-icons/Check'
 import Button from '@nextcloud/vue/dist/Components/Button'
 import AppContent from '@nextcloud/vue/dist/Components/AppContent'
 import Content from '@nextcloud/vue/dist/Components/Content'
@@ -78,7 +77,6 @@ import Modal from '@nextcloud/vue/dist/Components/Modal'
 import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
 
 import { generateUrl } from '@nextcloud/router'
-import { basename } from '@nextcloud/paths'
 import { loadState } from '@nextcloud/initial-state'
 import { getCurrentUser } from '@nextcloud/auth'
 
@@ -95,7 +93,6 @@ export default {
 		CreationForm,
 		RoomDetails,
 		VisavidNavigation,
-		CheckIcon,
 		CogIcon,
 		PlusIcon,
 		AppContent,
@@ -119,12 +116,6 @@ export default {
 		}
 	},
 
-	watch: {
-	},
-
-	mounted() {
-	},
-
 	computed: {
 		selectedRoom() {
 			return this.rooms[this.selectedRoomId]
@@ -132,6 +123,12 @@ export default {
 		roomCount() {
 			return Object.keys(this.rooms).length
 		},
+	},
+
+	watch: {
+	},
+
+	mounted() {
 	},
 
 	methods: {

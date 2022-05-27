@@ -84,15 +84,15 @@ export default {
 			}
 			const url = generateUrl('/apps/integration_visavid/admin-config')
 			axios.put(url, req).then((response) => {
-					showSuccess(t('integration_visavid', 'Visavid admin options saved'))
-				}).catch((error) => {
-					showError(
-						t('integration_visavid', 'Failed to save Visavid admin options')
+				showSuccess(t('integration_visavid', 'Visavid admin options saved'))
+			}).catch((error) => {
+				showError(
+					t('integration_visavid', 'Failed to save Visavid admin options')
 						+ ': ' + (error.response?.request?.responseText ?? '')
-					)
-					console.debug(error)
-				}).then(() => {
-				})
+				)
+				console.debug(error)
+			}).then(() => {
+			})
 		},
 	},
 }
