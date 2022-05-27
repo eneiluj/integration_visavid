@@ -97,6 +97,11 @@
 					class="fieldValue">
 					{{ getFormattedDatetime(room[fieldId]) }}
 				</label>
+				<label v-else-if="['ncColor'].includes(field.type)"
+					:id="'room-' + fieldId + '-value'"
+					class="fieldValue">
+					<div class="colorDot" :style="{ 'background-color': room[fieldId] }" />
+				</label>
 				<textarea v-if="['textarea'].includes(field.type)"
 					:id="'room-' + fieldId + '-value'"
 					class="fieldValue"
@@ -276,6 +281,11 @@ export default {
 				width: 300px;
 				height: 65px;
 				resize: none;
+			}
+			.colorDot {
+				width: 24px;
+				height: 24px;
+				border-radius: 50%;
 			}
 		}
 	}

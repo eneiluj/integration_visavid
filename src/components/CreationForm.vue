@@ -42,6 +42,22 @@
 						:clearable="true"
 						:confirm="true" />
 				</div>
+				<div v-else-if="field.type === 'ncColor'">
+					<ColorPicker ref="col"
+						:value="newRoom[fieldId]"
+						@input="updateColor($event, fieldId)">
+						<Button
+							v-tooltip.top="{ content: t('integration_visavid', 'Choose color') }"
+							:style="{ backgroundColor: newRoom[fieldId] }">
+							<template #icon>
+								<component :is="field.buttonIcon"
+									v-if="field.buttonIcon"
+									:size="20" />
+								<PaletteIcon v-else :size="20" />
+							</template>
+						</Button>
+					</ColorPicker>
+				</div>
 				<Multiselect v-else-if="field.type === 'select'"
 					:value="newRoom[fieldId]"
 					:options="Object.values(field.options)"
@@ -154,10 +170,12 @@
 </template>
 
 <script>
+import PaletteIcon from 'vue-material-design-icons/Palette'
 import CheckIcon from 'vue-material-design-icons/Check'
 import UndoIcon from 'vue-material-design-icons/Undo'
 import Button from '@nextcloud/vue/dist/Components/Button'
 import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
+import ColorPicker from '@nextcloud/vue/dist/Components/ColorPicker'
 import DatetimePicker from '@nextcloud/vue/dist/Components/DatetimePicker'
 import Highlight from '@nextcloud/vue/dist/Components/Highlight'
 import CheckboxRadioSwitch from '@nextcloud/vue/dist/Components/CheckboxRadioSwitch'
@@ -173,9 +191,11 @@ export default {
 		RadioElement,
 		CheckIcon,
 		UndoIcon,
+		PaletteIcon,
 		Button,
 		Multiselect,
 		DatetimePicker,
+		ColorPicker,
 		Highlight,
 		CheckboxRadioSwitch,
 	},
@@ -235,6 +255,9 @@ export default {
 			if (newValue !== null) {
 				this.$set(this.newRoom, fieldId, newValue)
 			}
+		},
+		updateColor(color, fieldId) {
+			this.newRoom[fieldId] = color
 		},
 	},
 }

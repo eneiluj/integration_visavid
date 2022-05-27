@@ -70,6 +70,12 @@ export const fields = {
 		type: 'ncDatetime',
 		default: new Date('2022-12-29 01:02:03'),
 	},
+	color: {
+		icon: PaletteIcon,
+		label: t('integration_visavid', 'Color'),
+		type: 'ncColor',
+		default: '#6ea68f',
+	},
 	share: {
 		icon: ShareVariantIcon,
 		label: t('integration_visavid', 'Switch'),
