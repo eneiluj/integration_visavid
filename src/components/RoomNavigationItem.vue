@@ -101,4 +101,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
+// nothing
 </style>

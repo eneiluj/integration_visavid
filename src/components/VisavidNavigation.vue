@@ -84,6 +84,7 @@ export default {
 .addRoomItem {
 	border-bottom: 1px solid var(--color-border);
 }
+
 ::v-deep .roomItem {
 	padding-right: 0 !important;
 	&.selectedRoom {
