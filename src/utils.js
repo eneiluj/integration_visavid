@@ -1,3 +1,4 @@
+import ShareVariantIcon from 'vue-material-design-icons/ShareVariant'
 import HomeGroupIcon from 'vue-material-design-icons/HomeGroup'
 import AccountGroupIcon from 'vue-material-design-icons/AccountGroup'
 import AccountGroupOutlineIcon from 'vue-material-design-icons/AccountGroupOutline'
@@ -54,6 +55,21 @@ export const fields = {
 		type: 'textarea',
 		placeholder: t('integration_visavid', 'long text\nplaceholder\n...'),
 		default: 'optional\ndefault\nvalue',
+	},
+	share: {
+		icon: ShareVariantIcon,
+		label: t('integration_visavid', 'Switch'),
+		type: 'ncswitch',
+		default: true,
+		// enabledIcon: TextIcon,
+		// disabledIcon: TextLongIcon,
+	},
+	share2: {
+		label: t('integration_visavid', 'Switch without icon'),
+		type: 'ncswitch',
+		default: false,
+		// enabledIcon: TextIcon,
+		// disabledIcon: TextLongIcon,
 	},
 	type: {
 		icon: FormatListBulletedTypeIcon,

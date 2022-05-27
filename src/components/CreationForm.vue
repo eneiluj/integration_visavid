@@ -8,9 +8,10 @@
 				:key="fieldId"
 				class="field">
 				<component :is="field.icon"
-					v-if="field.icon"
+					v-if="field.icon && !['ncswitch'].includes(field.type)"
 					:size="20" />
-				<label :for="'room-' + fieldId">
+				<label v-if="!['ncswitch'].includes(field.type)"
+					:for="'room-' + fieldId">
 					{{ field.label }}
 				</label>
 				<input v-if="field.type === 'text'"
@@ -80,7 +81,7 @@
 						:key="id"
 						:checked.sync="newRoom[fieldId]"
 						:value="id"
-						:name="fieldId + '_radio'"
+						:name="fieldId + '_checkbox'"
 						class="ncradio">
 						<component :is="option.icon"
 							v-if="option.icon"
@@ -89,6 +90,18 @@
 						<span class="option-title">
 							{{ option.label }}
 						</span>
+					</CheckboxRadioSwitch>
+				</div>
+				<div v-else-if="field.type === 'ncswitch'">
+					<CheckboxRadioSwitch
+						:checked.sync="newRoom[fieldId]"
+						type="switch"
+						class="ncradio">
+						<component :is="field.icon"
+							v-if="field.icon"
+							class="option-icon"
+							:size="20" />
+						{{ field.label }}
 					</CheckboxRadioSwitch>
 				</div>
 			</div>
@@ -171,7 +184,9 @@ export default {
 			let isFormValid = true
 			Object.keys(this.fields).forEach((fieldId) => {
 				const field = this.fields[fieldId]
-				if (!this.newRoom[fieldId]) {
+				const fieldValue = this.newRoom[fieldId]
+				// a field with false as value is accepted
+				if (!fieldValue && fieldValue !== false) {
 					showError(t('integration_visavid', 'Field "{name}" is missing', { name: field.label }))
 					isFormValid = false
 				}
@@ -207,6 +222,7 @@ export default {
 		.field {
 			display: flex;
 			align-items: center;
+			justify-content: right;
 			margin: 5px 0 5px 0;
 			padding: 8px;
 			border-radius: var(--border-radius-large);

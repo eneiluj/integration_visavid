@@ -52,8 +52,22 @@
 				<component :is="field.icon"
 					v-if="field.icon"
 					:size="20" />
+				<span v-else class="emptyIcon" />
 				<label class="fieldLabel">
 					{{ field.label }}
+				</label>
+				<label v-if="['ncswitch'].includes(field.type)"
+					:id="'room-' + fieldId + '-value'"
+					class="fieldValue multiple">
+					<component :is="field.enabledIcon"
+						v-if="room[fieldId] && field.enabledIcon"
+						:size="20" />
+					<component :is="field.disabledIcon"
+						v-else-if="!room[fieldId] && field.disabledIcon"
+						:size="20" />
+					<ToggleSwitchIcon v-else-if="room[fieldId]" :size="20" />
+					<ToggleSwitchOffOutlineIcon v-else-if="!room[fieldId]" :size="20" />
+					{{ room[fieldId] ? t('integration_visavid', 'Enabled') : t('integration_visavid', 'Disabled') }}
 				</label>
 				<label v-if="['text'].includes(field.type)"
 					:id="'room-' + fieldId + '-value'"
@@ -96,6 +110,8 @@ import ShieldLinkVariantIcon from 'vue-material-design-icons/ShieldLinkVariant'
 import LinkVariantIcon from 'vue-material-design-icons/LinkVariant'
 import ClipboardArrowLeftOutlineIcon from 'vue-material-design-icons/ClipboardArrowLeftOutline'
 import ClipboardCheckOutlineIcon from 'vue-material-design-icons/ClipboardCheckOutline'
+import ToggleSwitchIcon from 'vue-material-design-icons/ToggleSwitch'
+import ToggleSwitchOffOutlineIcon from 'vue-material-design-icons/ToggleSwitchOffOutline'
 
 import Button from '@nextcloud/vue/dist/Components/Button'
 import { showSuccess, showError } from '@nextcloud/dialogs'
@@ -108,6 +124,8 @@ export default {
 		ShieldLinkVariantIcon,
 		ClipboardArrowLeftOutlineIcon,
 		ClipboardCheckOutlineIcon,
+		ToggleSwitchIcon,
+		ToggleSwitchOffOutlineIcon,
 		Button,
 	},
 
@@ -195,6 +213,9 @@ export default {
 			}
 			> * {
 				margin: 0 8px 0 8px;
+			}
+			.emptyIcon {
+				width: 20px;
 			}
 			.fieldLabel {
 				width: 150px;
