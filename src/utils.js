@@ -1,3 +1,4 @@
+import ClockOutlineIcon from 'vue-material-design-icons/ClockOutline'
 import ShareVariantIcon from 'vue-material-design-icons/ShareVariant'
 import HomeGroupIcon from 'vue-material-design-icons/HomeGroup'
 import AccountGroupIcon from 'vue-material-design-icons/AccountGroup'
@@ -62,6 +63,12 @@ export const fields = {
 		label: t('integration_visavid', 'Date'),
 		type: 'ncDate',
 		default: new Date('2022-12-29'),
+	},
+	datetime: {
+		icon: ClockOutlineIcon,
+		label: t('integration_visavid', 'Datetime'),
+		type: 'ncDatetime',
+		default: new Date('2022-12-29 01:02:03'),
 	},
 	share: {
 		icon: ShareVariantIcon,

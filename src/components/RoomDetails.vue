@@ -92,6 +92,11 @@
 					class="fieldValue">
 					{{ getFormattedDate(room[fieldId]) }}
 				</label>
+				<label v-else-if="['ncDatetime'].includes(field.type)"
+					:id="'room-' + fieldId + '-value'"
+					class="fieldValue">
+					{{ getFormattedDatetime(room[fieldId]) }}
+				</label>
 				<textarea v-if="['textarea'].includes(field.type)"
 					:id="'room-' + fieldId + '-value'"
 					class="fieldValue"
@@ -211,6 +216,9 @@ export default {
 		},
 		getFormattedDate(date) {
 			return moment(date).format('LL')
+		},
+		getFormattedDatetime(date) {
+			return moment(date).format('LLL')
 		},
 	},
 }

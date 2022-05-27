@@ -32,6 +32,16 @@
 						:clearable="true"
 						:confirm="false" />
 				</div>
+				<div v-else-if="field.type === 'ncDatetime'">
+					<DatetimePicker
+						:id="'room-' + fieldId"
+						v-model="newRoom[fieldId]"
+						type="datetime"
+						:placeholder="field.placeholder"
+						:minute-step="1"
+						:clearable="true"
+						:confirm="true" />
+				</div>
 				<Multiselect v-else-if="field.type === 'select'"
 					:value="newRoom[fieldId]"
 					:options="Object.values(field.options)"
