@@ -1,3 +1,13 @@
+import HomeGroupIcon from 'vue-material-design-icons/HomeGroup'
+import AccountGroupIcon from 'vue-material-design-icons/AccountGroup'
+import AccountGroupOutlineIcon from 'vue-material-design-icons/AccountGroupOutline'
+import TextIcon from 'vue-material-design-icons/Text'
+import PaletteIcon from 'vue-material-design-icons/Palette'
+import PaletteSwatchIcon from 'vue-material-design-icons/PaletteSwatch'
+import PaletteSwatchOutlineIcon from 'vue-material-design-icons/PaletteSwatchOutline'
+import TextLongIcon from 'vue-material-design-icons/TextLong'
+import FormatListBulletedTypeIcon from 'vue-material-design-icons/FormatListBulletedType'
+
 export function Timer(callback, mydelay) {
 	let timerId
 	let start
@@ -29,16 +39,6 @@ export function delay(callback, ms) {
 		}, ms || 0)
 	}
 }
-
-import HomeGroupIcon from 'vue-material-design-icons/HomeGroup'
-import AccountGroupIcon from 'vue-material-design-icons/AccountGroup'
-import AccountGroupOutlineIcon from 'vue-material-design-icons/AccountGroupOutline'
-import TextIcon from 'vue-material-design-icons/Text'
-import PaletteIcon from 'vue-material-design-icons/Palette'
-import PaletteSwatchIcon from 'vue-material-design-icons/PaletteSwatch'
-import PaletteSwatchOutlineIcon from 'vue-material-design-icons/PaletteSwatchOutline'
-import TextLongIcon from 'vue-material-design-icons/TextLong'
-import FormatListBulletedTypeIcon from 'vue-material-design-icons/FormatListBulletedType'
 
 export const fields = {
 	name: {
@@ -77,4 +77,3 @@ export const fields = {
 		},
 	},
 }
-

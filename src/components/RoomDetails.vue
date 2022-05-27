@@ -50,7 +50,8 @@
 				:key="fieldId"
 				class="field">
 				<component v-if="field.icon"
-					:is="field.icon" :size="20" />
+					:is="field.icon"
+					:size="20" />
 				<label class="fieldLabel">
 					{{ field.label }}
 				</label>
@@ -62,12 +63,14 @@
 				<textarea v-if="['textarea'].includes(field.type)"
 					:id="'room-' + fieldId + '-value'"
 					class="fieldValue"
-					:readonly="true">{{ room[fieldId] }}</textarea>
+					:value="room[fieldId]"
+					:readonly="true" />
 				<label v-else-if="['select', 'radio'].includes(field.type)"
 					:for="'room-' + fieldId + '-value'"
 					class="fieldValue multiple">
 					<component v-if="field.options[room[fieldId]].icon"
-						:is="field.options[room[fieldId]].icon" :size="20" />
+						:is="field.options[room[fieldId]].icon"
+						:size="20" />
 					{{ field.options[room[fieldId]].label }}
 				</label>
 			</div>

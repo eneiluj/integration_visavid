@@ -1,12 +1,11 @@
 <template>
 	<span :aria-hidden="!title"
-        :aria-label="title"
-        class="material-design-icon cospend-icon"
-        role="img"
-        v-bind="$attrs"
-        @click="$emit('click', $event)">
-		<svg
-			:fill="fillColor"
+		:aria-label="title"
+		class="material-design-icon cospend-icon"
+		role="img"
+		v-bind="$attrs"
+		@click="$emit('click', $event)">
+		<svg :fill="fillColor"
 			:width="size"
 			:height="size"
 			enable-background="new 0 0 101.33333 92"

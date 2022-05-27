@@ -8,7 +8,8 @@
 				:key="fieldId"
 				class="field">
 				<component v-if="field.icon"
-					:is="field.icon" :size="20" />
+					:is="field.icon"
+					:size="20" />
 				<label :for="'room-' + fieldId">
 					{{ field.label }}
 				</label>

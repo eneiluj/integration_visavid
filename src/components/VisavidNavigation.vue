@@ -9,14 +9,13 @@
 					<PlusIcon :size="20" />
 				</template>
 			</AppNavigationItem>
-			<RoomNavigationItem
-				v-for="(room, id) in rooms"
+			<RoomNavigationItem v-for="(room, id) in rooms"
 				:key="id"
 				class="roomItem"
 				:room="room"
 				:selected="room.id === selectedRoomId"
 				@room-clicked="onRoomClicked"
-				@delete-room="onRoomDeleted"/>
+				@delete-room="onRoomDeleted" />
 		</template>
 		<!--template #footer></template-->
 	</AppNavigation>

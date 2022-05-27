@@ -21,9 +21,9 @@
 		@click="onRoomClick">
 		<template #icon>
 			<ForumIcon v-if="selected"
-				:size="20"/>
+				:size="20" />
 			<ForumOutlineIcon v-else
-				:size="20"/>
+				:size="20" />
 		</template>
 		<template #actions>
 			<ActionButton
@@ -44,7 +44,6 @@ import ForumIcon from 'vue-material-design-icons/Forum'
 import ForumOutlineIcon from 'vue-material-design-icons/ForumOutline'
 import ClickOutside from 'vue-click-outside'
 
-import Actions from '@nextcloud/vue/dist/Components/Actions'
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
 
@@ -55,7 +54,6 @@ export default {
 	components: {
 		AppNavigationItem,
 		ActionButton,
-		Actions,
 		ForumIcon,
 		ForumOutlineIcon,
 		DeleteIcon,
