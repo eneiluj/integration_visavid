@@ -69,7 +69,7 @@
 					<CheckboxBlankOutlineIcon v-else-if="!room[fieldId]" :size="20" />
 					{{ room[fieldId] ? t('integration_visavid', 'Enabled') : t('integration_visavid', 'Disabled') }}
 				</label>
-				<label v-if="['ncswitch'].includes(field.type)"
+				<label v-if="['ncSwitch'].includes(field.type)"
 					:id="'room-' + fieldId + '-value'"
 					class="fieldValue multiple">
 					<component :is="field.enabledIcon"
@@ -235,7 +235,7 @@ export default {
 				width: 20px;
 			}
 			.fieldLabel {
-				width: 150px;
+				width: 250px;
 			}
 			.fieldValue {
 				&.multiple {
@@ -273,7 +273,7 @@ export default {
 				margin: 0 8px 0 8px;
 			}
 			label {
-				width: 150px;
+				width: 250px;
 			}
 			.linkInputWrapper {
 				display: flex;

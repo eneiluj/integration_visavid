@@ -8,9 +8,9 @@
 				:key="fieldId"
 				class="field">
 				<component :is="field.icon"
-					v-if="field.icon && !['ncswitch', 'ncCheckbox'].includes(field.type)"
+					v-if="field.icon && !['ncSwitch', 'ncCheckbox'].includes(field.type)"
 					:size="20" />
-				<label v-if="!['ncswitch', 'ncCheckbox'].includes(field.type)"
+				<label v-if="!['ncSwitch', 'ncCheckbox'].includes(field.type)"
 					:for="'room-' + fieldId">
 					{{ field.label }}
 				</label>
@@ -92,7 +92,7 @@
 						</span>
 					</CheckboxRadioSwitch>
 				</div>
-				<div v-else-if="field.type === 'ncswitch'">
+				<div v-else-if="field.type === 'ncSwitch'">
 					<CheckboxRadioSwitch
 						:checked.sync="newRoom[fieldId]"
 						type="switch"

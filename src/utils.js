@@ -59,14 +59,14 @@ export const fields = {
 	share: {
 		icon: ShareVariantIcon,
 		label: t('integration_visavid', 'Switch'),
-		type: 'ncswitch',
+		type: 'ncSwitch',
 		default: true,
 		// enabledIcon: TextIcon,
 		// disabledIcon: TextLongIcon,
 	},
 	share2: {
 		label: t('integration_visavid', 'Switch without icon'),
-		type: 'ncswitch',
+		type: 'ncSwitch',
 		default: false,
 		// enabledIcon: TextIcon,
 		// disabledIcon: TextLongIcon,
