@@ -10,7 +10,8 @@
 				type="radio"
 				name="permission"
 				:value="optionId">
-			<span class="option-icon">
+			<span v-if="shouldShowIcon[optionId]"
+				class="option-icon">
 				<slot name="icon" :option="option">
 					<component :is="option.icon"
 						v-if="option.icon"
@@ -49,6 +50,21 @@ export default {
 		},
 	},
 
+	computed: {
+		/**
+		 * We render the icon wrapper element only if needed
+		 * (there is an icon slot defined OR the option has an icon attribute)
+		 * This helps to align the label correctly
+		 */
+		shouldShowIcon() {
+			const result = {}
+			Object.keys(this.options).forEach((optionId) => {
+				result[optionId] = !(!this.$scopedSlots.icon && !this.options[optionId].icon)
+			})
+			return result
+		},
+	},
+
 	methods: {
 		onUpdateValue(newValue) {
 			this.$emit('update:value', newValue)
@@ -65,7 +81,8 @@ export default {
 	.option {
 		display: flex;
 		align-items: center;
-		height: 44px;
+		min-height: 44px;
+		padding: 0 14px;
 		border: 2px solid var(--color-border-dark);
 		// no bottom borders to avoid double borders between elements
 		border-bottom: 0;
@@ -105,7 +122,10 @@ export default {
 			margin: 0;
 		}
 		.option-icon {
-			margin: 0 12px 0 12px;
+			margin: 0 12px 0 0;
+		}
+		.option-title {
+			margin: 8px 0;
 		}
 	}
 }
