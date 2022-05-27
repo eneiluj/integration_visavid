@@ -76,4 +76,16 @@ export const fields = {
 			four: { label: 'Fourth radio value', icon: PaletteIcon },
 		},
 	},
+	permissions: {
+		icon: PaletteSwatchIcon,
+		label: t('integration_visavid', 'Classic Radio selector'),
+		type: 'ncradio',
+		default: 'three',
+		options: {
+			one: { label: 'First radio value', icon: PaletteSwatchIcon },
+			two: { label: 'Second radio value', icon: PaletteSwatchOutlineIcon },
+			three: { label: 'Third radio value', icon: PaletteIcon },
+			four: { label: 'Fourth radio value', icon: PaletteIcon },
+		},
+	},
 }

@@ -57,6 +57,16 @@
 						lala
 					</template-->
 				</RadioElement>
+				<div v-else-if="field.type === 'ncradio'">
+					<CheckboxRadioSwitch v-for="(option, id) in field.options"
+						:key="id"
+						:checked.sync="newRoom[fieldId]"
+						:value="id"
+						:name="fieldId + '_radio'"
+						type="radio">
+						{{ option.label }}
+					</CheckboxRadioSwitch>
+				</div>
 			</div>
 		</div>
 		<div class="footer">
@@ -82,6 +92,7 @@ import UndoIcon from 'vue-material-design-icons/Undo'
 import Button from '@nextcloud/vue/dist/Components/Button'
 import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
 import Highlight from '@nextcloud/vue/dist/Components/Highlight'
+import CheckboxRadioSwitch from '@nextcloud/vue/dist/Components/CheckboxRadioSwitch'
 import { showError } from '@nextcloud/dialogs'
 
 import { fields } from '../utils'
@@ -97,6 +108,7 @@ export default {
 		Button,
 		Multiselect,
 		Highlight,
+		CheckboxRadioSwitch,
 	},
 
 	props: {
@@ -104,7 +116,7 @@ export default {
 
 	data() {
 		return {
-			newRoom: { style: fields.style.default },
+			newRoom: { style: fields.style.default, permissions: fields.permissions.default },
 			fields,
 			query: '',
 		}
