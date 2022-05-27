@@ -84,12 +84,7 @@ export default {
 		}
 		&:focus,
 		&:hover {
-			background: var(--color-background-hover);
-			// hovered elements have a bottom border and we remove the one of the following element
-			border: 2px solid var(--color-primary-element-light);
-			& + .option {
-				border-top: 0;
-			}
+			background: var(--color-primary-light);
 		}
 		&.selected {
 			background: var(--color-primary-light);
