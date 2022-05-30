@@ -1,30 +1,31 @@
 <template>
-	<fieldset class="option-list">
-		<label v-for="(option, optionId) in options"
+	<span class="option-list">
+		<span v-for="(option, optionId) in options"
 			:key="optionId"
 			:class="{ option: true, selected: value === optionId }"
-			:style="{ '--border-radius': borderRadius ? borderRadius + 'px' : borderRadius }"
-			:for="fieldId + '-' + optionId"
-			@click="onUpdateValue(optionId)">
-			<input :id="fieldId + '-' + optionId"
+			:style="{ '--border-radius': borderRadius ? borderRadius + 'px' : borderRadius }">
+			<input :id="name + '-' + optionId"
 				type="radio"
-				name="permission"
-				:value="optionId">
-			<span v-if="shouldShowIcon[optionId]"
-				class="option-icon">
-				<slot name="icon" :option="option">
-					<component :is="option.icon"
-						v-if="option.icon"
-						:size="20" />
-				</slot>
-			</span>
-			<span class="option-title">
-				<slot name="label" :option="option">
-					{{ option.label }}
-				</slot>
-			</span>
-		</label>
-	</fieldset>
+				:name="name"
+				:value="optionId"
+				@change="onUpdateValue(optionId)">
+			<label :for="name + '-' + optionId">
+				<span v-if="shouldShowIcon[optionId]"
+					class="option-icon">
+					<slot name="icon" :option="option">
+						<component :is="option.icon"
+							v-if="option.icon"
+							:size="20" />
+					</slot>
+				</span>
+				<span class="option-title">
+					<slot name="label" :option="option">
+						{{ option.label }}
+					</slot>
+				</span>
+			</label>
+		</span>
+	</span>
 </template>
 
 <script>
@@ -40,7 +41,7 @@ export default {
 			required: true,
 		},
 		// to make sure the sub ids are unique
-		fieldId: {
+		name: {
 			type: String,
 			required: true,
 		},
@@ -67,6 +68,7 @@ export default {
 
 	methods: {
 		onUpdateValue(newValue) {
+			console.debug('change valueXXXX', newValue)
 			this.$emit('update:value', newValue)
 		},
 	},
@@ -115,17 +117,21 @@ export default {
 				border-top: 0;
 			}
 		}
-		input {
+		> input {
 			// display: none;
 			opacity: 0;
 			width: 0;
 			margin: 0;
 		}
-		.option-icon {
-			margin: 0 12px 0 0;
-		}
-		.option-title {
-			margin: 8px 0;
+		> label {
+			display: flex;
+			align-items: center;
+			.option-icon {
+				margin: 0 12px 0 0;
+			}
+			.option-title {
+				margin: 8px 0;
+			}
 		}
 	}
 }

@@ -83,7 +83,7 @@
 					</template>
 				</Multiselect>
 				<RadioElement v-else-if="field.type === 'customRadioSet'"
-					:field-id="fieldId"
+					:name="fieldId + '_radio'"
 					:options="field.options"
 					:value="newRoom[fieldId]"
 					@update:value="newRoom[fieldId] = $event">
