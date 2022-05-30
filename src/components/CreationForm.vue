@@ -82,7 +82,7 @@
 						</span>
 					</template>
 				</Multiselect>
-				<RadioElement v-else-if="field.type === 'customRadioSet'"
+				<RadioElementSet v-else-if="field.type === 'customRadioSet'"
 					:name="fieldId + '_radio'"
 					:options="field.options"
 					:value="newRoom[fieldId]"
@@ -90,10 +90,10 @@
 					<!--template #icon="{option}">
 						{{ option.label }}
 					</template-->
-					<!--template #label="{option}">
-						lala
+					<!--template-- #label="{option}">
+						{{ option.label + 'lala' }}
 					</template-->
-				</RadioElement>
+				</RadioElementSet>
 				<div v-else-if="field.type === 'ncRadioSet'">
 					<CheckboxRadioSwitch v-for="(option, id) in field.options"
 						:key="id"
@@ -182,13 +182,13 @@ import CheckboxRadioSwitch from '@nextcloud/vue/dist/Components/CheckboxRadioSwi
 import { showError } from '@nextcloud/dialogs'
 
 import { fields } from '../utils'
-import RadioElement from './RadioElement'
+import RadioElementSet from './RadioElementSet'
 
 export default {
 	name: 'CreationForm',
 
 	components: {
-		RadioElement,
+		RadioElementSet,
 		CheckIcon,
 		UndoIcon,
 		PaletteIcon,
