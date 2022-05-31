@@ -19,43 +19,35 @@
 					v-model="newRoom[fieldId]"
 					type="text"
 					:placeholder="field.placeholder">
-				<textarea v-else-if="field.type === 'textarea'"
+				<span v-else-if="field.type === 'textarea'"
+					class="textarea-wrapper">
+					<textarea
+						:id="'room-' + fieldId"
+						v-model="newRoom[fieldId]"
+						:placeholder="field.placeholder" />
+				</span>
+				<DatetimePicker v-else-if="field.type === 'ncDate'"
 					:id="'room-' + fieldId"
 					v-model="newRoom[fieldId]"
-					:placeholder="field.placeholder" />
-				<div v-else-if="field.type === 'ncDate'">
-					<DatetimePicker
-						:id="'room-' + fieldId"
-						v-model="newRoom[fieldId]"
-						type="date"
-						:placeholder="field.placeholder"
-						:clearable="true"
-						:confirm="false" />
-				</div>
-				<div v-else-if="field.type === 'ncDatetime'">
-					<DatetimePicker
-						:id="'room-' + fieldId"
-						v-model="newRoom[fieldId]"
-						type="datetime"
-						:placeholder="field.placeholder"
-						:minute-step="1"
-						:clearable="true"
-						:confirm="true" />
-				</div>
+					type="date"
+					:placeholder="field.placeholder"
+					:clearable="true"
+					:confirm="false" />
+				<DatetimePicker v-else-if="field.type === 'ncDatetime'"
+					:id="'room-' + fieldId"
+					v-model="newRoom[fieldId]"
+					type="datetime"
+					:placeholder="field.placeholder"
+					:minute-step="1"
+					:clearable="true"
+					:confirm="true" />
 				<div v-else-if="field.type === 'ncColor'">
-					<ColorPicker ref="col"
+					<ColorPicker
 						:value="newRoom[fieldId]"
 						@input="updateColor($event, fieldId)">
 						<Button
 							v-tooltip.top="{ content: t('integration_visavid', 'Choose color') }"
-							:style="{ backgroundColor: newRoom[fieldId] }">
-							<template #icon>
-								<component :is="field.buttonIcon"
-									v-if="field.buttonIcon"
-									:size="20" />
-								<PaletteIcon v-else :size="20" />
-							</template>
-						</Button>
+							:style="{ backgroundColor: newRoom[fieldId] }" />
 					</ColorPicker>
 				</div>
 				<Multiselect v-else-if="field.type === 'select'"
@@ -308,8 +300,12 @@ export default {
 				overflow: hidden;
 				white-space: nowrap;
 			}
-			textarea {
-				height: 65px;
+			.textarea-wrapper {
+				textarea {
+					height: 65px;
+					width: 250px;
+					max-width: 250px;
+				}
 			}
 			// this fixes the multiline radio label
 			::v-deep .ncradio > label {
