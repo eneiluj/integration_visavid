@@ -1,22 +1,10 @@
 <template>
 	<AppNavigation>
 		<template #list>
-			<Button v-if="isConfigured"
-				class="addRoomButton"
-				@click="onCreateRoomClick">
-				<template #icon>
-					<PlusIcon :size="20" />
-				</template>
-				{{ t('integration_visavid', 'Create a room') }}
-			</Button>
-			<!--AppNavigationItem v-if="isConfigured"
-				class="addRoomItem"
-				:title="t('integration_visavid', 'New room')"
-				@click="onCreateRoomClick">
-				<template #icon>
-					<PlusIcon :size="20" />
-				</template>
-			</AppNavigationItem-->
+			<AppNavigationNew v-if="isConfigured"
+				:text="t('integration_visavid', 'Create a room')"
+				button-class="icon-add"
+				@click="onCreateRoomClick" />
 			<RoomNavigationItem v-for="(room, id) in rooms"
 				:key="id"
 				class="roomItem"
@@ -31,9 +19,7 @@
 </template>
 
 <script>
-import PlusIcon from 'vue-material-design-icons/Plus'
-import Button from '@nextcloud/vue/dist/Components/Button'
-// import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
+import AppNavigationNew from '@nextcloud/vue/dist/Components/AppNavigationNew'
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
 import RoomNavigationItem from './RoomNavigationItem'
 
@@ -42,10 +28,8 @@ export default {
 
 	components: {
 		RoomNavigationItem,
-		// AppNavigationItem,
+		AppNavigationNew,
 		AppNavigation,
-		Button,
-		PlusIcon,
 	},
 
 	props: {
@@ -95,11 +79,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.addRoomButton {
-	margin: 8px;
-	width: 94%;
-}
-
 .addRoomItem {
 	border-bottom: 1px solid var(--color-border);
 }
