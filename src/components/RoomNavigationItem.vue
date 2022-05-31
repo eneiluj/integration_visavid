@@ -28,6 +28,14 @@
 		<template #actions>
 			<ActionButton
 				:close-after-click="true"
+				@click="onFavoriteClick">
+				<template #icon>
+					<StarIcon :size="20" />
+				</template>
+				{{ t('integration_visavid', 'Add to favorites') }}
+			</ActionButton>
+			<ActionButton
+				:close-after-click="true"
 				@click="onDeleteClick">
 				<template #icon>
 					<DeleteIcon :size="20" />
@@ -39,6 +47,7 @@
 </template>
 
 <script>
+import StarIcon from 'vue-material-design-icons/Star'
 import DeleteIcon from 'vue-material-design-icons/Delete'
 import ForumIcon from 'vue-material-design-icons/Forum'
 import ForumOutlineIcon from 'vue-material-design-icons/ForumOutline'
@@ -57,6 +66,7 @@ export default {
 		ForumIcon,
 		ForumOutlineIcon,
 		DeleteIcon,
+		StarIcon,
 	},
 	directives: {
 		ClickOutside,

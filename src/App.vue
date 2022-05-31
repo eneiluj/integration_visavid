@@ -40,15 +40,19 @@
 				<template #icon>
 					<VisavidIcon />
 				</template>
-				{{ t('integration_visavid', 'No room') }}
-				<Button
-					class="createButton"
-					@click="onCreateRoomClick">
-					<template #icon>
-						<PlusIcon />
-					</template>
-					{{ t('integration_visavid', 'Create a room') }}
-				</Button>
+				<span class="emptyContentWrapper">
+					<span>
+						{{ t('integration_visavid', 'You haven\'t created any rooms yet') }}
+					</span>
+					<Button
+						class="createButton"
+						@click="onCreateRoomClick">
+						<template #icon>
+							<PlusIcon />
+						</template>
+						{{ t('integration_visavid', 'Create a room') }}
+					</Button>
+				</span>
 			</EmptyContent>
 			<EmptyContent v-else>
 				<template #icon>
@@ -167,6 +171,12 @@ export default {
 body {
 	min-height: 100%;
 	height: auto;
+}
+
+.emptyContentWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .createButton,

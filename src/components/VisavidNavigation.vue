@@ -7,7 +7,7 @@
 				<template #icon>
 					<PlusIcon :size="20" />
 				</template>
-				{{ t('integration_visavid', 'New room') }}
+				{{ t('integration_visavid', 'Create a room') }}
 			</Button>
 			<!--AppNavigationItem v-if="isConfigured"
 				class="addRoomItem"
