@@ -23,7 +23,8 @@
 				:room="room"
 				:selected="room.id === selectedRoomId"
 				@room-clicked="onRoomClicked"
-				@delete-room="onRoomDeleted" />
+				@delete-room="onRoomDeleted"
+				@deleting-room="onDeletingRoom" />
 		</template>
 		<!--template #footer></template-->
 	</AppNavigation>
@@ -85,6 +86,9 @@ export default {
 		},
 		onRoomDeleted(roomId) {
 			this.$emit('delete-room', roomId)
+		},
+		onDeletingRoom(roomId) {
+			this.$emit('deleting-room', roomId)
 		},
 	},
 }

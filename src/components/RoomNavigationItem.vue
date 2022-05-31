@@ -1,20 +1,5 @@
 <template>
-	<AppNavigationItem v-if="deleting"
-		:title="t('integration_visavid', 'Are you sure?')"
-		:undo="true"
-		@undo="cancelDeletion">
-		<template #counter>
-			<vac :end-time="new Date().getTime() + (7000)">
-				<template #process="{ timeObj }">
-					<span>{{ `${timeObj.s}` }}</span>
-				</template>
-				<!--template v-slot:finish>
-					<span>Done!</span>
-				</template-->
-			</vac>
-		</template>
-	</AppNavigationItem>
-	<AppNavigationItem v-else
+	<AppNavigationItem v-show="!deleting"
 		:title="room.name"
 		:class="{ selectedRoom: selected }"
 		:force-menu="false"
@@ -55,6 +40,7 @@ import ClickOutside from 'vue-click-outside'
 
 import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
 import AppNavigationItem from '@nextcloud/vue/dist/Components/AppNavigationItem'
+import { showUndo } from '@nextcloud/dialogs'
 
 import { Timer } from '../utils'
 
@@ -99,12 +85,17 @@ export default {
 			this.deleting = true
 			this.deletionTimer = new Timer(() => {
 				this.$emit('delete-room', this.room.id)
-			}, 7000)
+			}, 10000)
+			showUndo(t('integration_visavid', 'Room deleted'), this.cancelDeletion, { timeout: 10000 })
+			this.$emit('deleting-room', this.room.id)
 		},
 		cancelDeletion() {
 			this.deleting = false
 			this.deletionTimer.pause()
 			delete this.deletionTimer
+		},
+		onFavoriteClick() {
+			console.debug('on fav click')
 		},
 	},
 }

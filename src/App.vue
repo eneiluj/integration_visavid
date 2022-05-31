@@ -6,7 +6,8 @@
 			:is-configured="state.is_configured"
 			@create-room-clicked="onCreateRoomClick"
 			@room-clicked="onRoomClicked"
-			@delete-room="onRoomDeleted" />
+			@delete-room="onRoomDeleted"
+			@deleting-room="onDeletingRoom" />
 		<AppContent
 			:list-max-width="50"
 			:list-min-width="20"
@@ -158,6 +159,11 @@ export default {
 		onRoomDeleted(roomId) {
 			console.debug('DELETE room', roomId)
 			this.$delete(this.rooms, roomId)
+		},
+		onDeletingRoom(roomId) {
+			if (roomId === this.selectedRoomId) {
+				this.selectedRoomId = 0
+			}
 		},
 	},
 }
