@@ -7,13 +7,17 @@
 			<div v-for="(field, fieldId) in fields"
 				:key="fieldId"
 				class="field">
-				<component :is="field.icon"
-					v-if="field.icon && !['ncSwitch', 'ncCheckbox'].includes(field.type)"
-					:size="20" />
-				<label v-if="!['ncSwitch', 'ncCheckbox'].includes(field.type)"
-					:for="'room-' + fieldId">
-					{{ field.label }}
-				</label>
+				<div v-if="!['ncSwitch', 'ncCheckbox'].includes(field.type)"
+					class="fieldLabelWithIcon">
+					<component :is="field.icon"
+						v-if="field.icon"
+						:size="20" />
+					<label
+						:for="'room-' + fieldId">
+						{{ field.label }}
+					</label>
+				</div>
+				<span v-else class="fieldLabelWithIcon" />
 				<input v-if="field.type === 'text'"
 					:id="'room-' + fieldId"
 					v-model="newRoom[fieldId]"
@@ -269,7 +273,8 @@ export default {
 		.field {
 			display: flex;
 			align-items: center;
-			justify-content: right;
+			justify-content: center;
+			flex-wrap: wrap;
 			margin: 5px 0 5px 0;
 			padding: 8px;
 			border-radius: var(--border-radius-large);
@@ -277,13 +282,20 @@ export default {
 				background-color: var(--color-background-hover);
 			}
 			> * {
-				margin: 0 8px 0 8px;
+				margin: 4px;
 				&:last-child {
 					width: 250px;
 				}
 			}
-			label {
-				width: 150px;
+			.fieldLabelWithIcon {
+				display: flex;
+				width: 250px;
+				label {
+					width: 150px;
+				}
+				> * {
+					margin: 0 8px 0 8px;
+				}
 			}
 			.option-icon {
 				margin-left: 4px;
