@@ -92,6 +92,7 @@ export default {
 		background: var(--color-primary-light);
 	}
 	&.selected {
+		font-weight: bold;
 		background: var(--color-primary-light);
 		// selected element has a bottom border and we remove the one of the following element
 		border: 2px solid var(--color-primary-element-light);
