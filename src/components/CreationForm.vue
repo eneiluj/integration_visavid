@@ -91,11 +91,35 @@
 					</template-->
 				</RadioElementSet>
 				<div v-else-if="field.type === 'ncRadioSet'">
+					<div v-for="(option, id) in field.options"
+						:key="id + 'a'">
+						<CheckboxRadioSwitch
+							:checked.sync="newRoom[fieldId]"
+							:value="id"
+							:name="fieldId + '_radio_a'"
+							:alternative-style="true"
+							type="radio"
+							class="ncradio">
+							<component :is="option.icon"
+								v-if="option.icon"
+								class="option-icon"
+								:size="20" />
+							<span class="option-title">
+								{{ option.label }}
+							</span>
+						</CheckboxRadioSwitch>
+						<span>
+							Whoop
+						</span>
+					</div>
+				</div>
+				<div v-else-if="field.type === 'ncRadioSet2'">
 					<CheckboxRadioSwitch v-for="(option, id) in field.options"
 						:key="id"
 						:checked.sync="newRoom[fieldId]"
 						:value="id"
 						:name="fieldId + '_radio'"
+						:alternative-style="true"
 						type="radio"
 						class="ncradio">
 						<component :is="option.icon"
@@ -279,7 +303,7 @@ export default {
 			padding: 8px;
 			border-radius: var(--border-radius-large);
 			&:hover {
-				background-color: var(--color-background-hover);
+				//background-color: var(--color-background-hover);
 			}
 			> * {
 				margin: 4px;
