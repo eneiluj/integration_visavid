@@ -1,7 +1,7 @@
 <template>
 	<span :aria-hidden="!title"
 		:aria-label="title"
-		class="material-design-icon cospend-icon"
+		class="material-design-icon visavid-icon"
 		role="img"
 		v-bind="$attrs"
 		@click="$emit('click', $event)">

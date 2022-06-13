@@ -38,7 +38,7 @@ class VisavidAPIService {
 	private $client;
 
 	/**
-	 * Service to make requests to GitLab v3 (JSON) API
+	 * Service to make requests to Visavid API
 	 */
 	public function __construct (string $appName,
 								LoggerInterface $logger,

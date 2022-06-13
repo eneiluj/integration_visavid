@@ -1,4 +1,4 @@
-app_name=visavid_integration
+app_name=integration_visavid
 app_version=$(version)
 project_dir=.
 build_dir=/tmp/build
